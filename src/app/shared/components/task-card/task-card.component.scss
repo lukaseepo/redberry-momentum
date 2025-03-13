@@ -1,0 +1,101 @@
+@import "variables";
+
+.task-card {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  border-radius: 15px;
+  flex-direction: column;
+  .card-creator {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 25px;
+    .comments {
+      display: flex;
+      column-gap: 5px;
+      align-items: center;
+      h4 {
+        font-weight: normal;
+        color: $black;
+        font-size: 14px;
+      }
+    }
+  }
+  .card-description {
+    display: flex;
+    flex-direction: column;
+    padding-top: 25px;
+    row-gap: 10px;
+    h4 {
+      color: $black;
+      font-size: 15px;
+    }
+
+    p {
+      font-size: 14px;
+      color: $gray2;
+    }
+  }
+  .card-details {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    .due {
+      color: $black;
+      font-size: 12px;
+      font-weight: normal;
+    }
+    .details {
+      display: flex;
+      column-gap: 8px;
+      .department {
+        padding: 4px 6px;
+        height: 26px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #FF66A8;
+        color: white;
+        border-radius: 15px;
+        font-size: 12px;
+      }
+      .priority {
+        height: 26px;
+        display: flex;
+        column-gap: 5px;
+        align-items: center;
+        justify-content: center;
+        padding: 4px 6px;
+        font-size: 12px;
+        border-radius: 4px;
+        &.low {
+          border: 1px solid $low-priority;
+          color: $low-priority;
+        }
+        &.medium {
+          border: 1px solid $medium-priority;
+          color: $medium-priority;
+        }
+        &.high {
+          border: 1px solid $high-priority;
+          color: $high-priority;
+        }
+      }
+    }
+  }
+  &.start {
+    border: 1px solid $start;
+  }
+  &.testing {
+    border: 1px solid $testing;
+  }
+  &.progress {
+    border: 1px solid $progress;
+  }
+  &.finished {
+    border: 1px solid $finished;
+  }
+}

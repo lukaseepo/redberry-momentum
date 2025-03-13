@@ -1,0 +1,79 @@
+@import 'variables';
+
+:host .filter {
+  width: 688px;
+  height: 44px;
+  padding: 0 18px;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  border: 1px solid $gray;
+  position: relative;
+  .filter-options {
+    position: absolute;
+    width: 688px;
+    background: white;
+    border: 1px solid $purple;
+    left: 0;
+    top: 55px;
+    border-radius: 10px;
+    padding: 40px 30px 20px 30px;
+    .button-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: end;
+      margin-top: 20px;
+    }
+    .checkbox-wrapper {
+      display: flex;
+      flex-direction: column;
+      row-gap: 20px;
+      justify-content: center;
+      .checkbox {
+        display: flex;
+        column-gap: 10px;
+        align-items: center;
+        label {
+          color: $black;
+          font-size: 16px;
+          cursor: pointer;
+        }
+      }
+    }
+    ::ng-deep {
+      .p-checkbox-box {
+        background: white;
+        border: 2px solid $black;
+      }
+      .p-checkbox-checked .p-checkbox-icon {
+        color: $black;
+        width: 14px;
+        height: 14px;
+      }
+    }
+  }
+  .filter-items {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    .filter-item {
+      display: flex;
+      column-gap: 5px;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+      &.active {
+        h4 {
+          color: $purple;
+        }
+      }
+      h4 {
+        font-weight: normal;
+        color: $black;
+        font-size: 16px;
+      }
+    }
+  }
+}

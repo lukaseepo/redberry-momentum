@@ -1,0 +1,13 @@
+.tasks-items {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  column-gap: 50px;
+  margin-top: 25px;
+  .tasks {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 30px;
+  }
+}

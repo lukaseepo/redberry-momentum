@@ -1,14 +1,16 @@
 .header-section {
   width: 100%;
-  background: white;
+
   .header-items {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 31px 0;
+
     .logo {
       cursor: pointer;
     }
+
     .nav {
       display: flex;
       column-gap: 25px;

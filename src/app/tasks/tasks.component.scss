@@ -1,0 +1,19 @@
+@import "variables";
+
+.tasks-section {
+  width: 100%;
+  background: white;
+  padding-top: 45px;
+  .tasks-wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-row-gap: 55px;
+    .title {
+      width: 100%;
+      h3 {
+        color: $black;
+        font-size: 34px;
+      }
+    }
+  }
+}

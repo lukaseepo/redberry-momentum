@@ -16,8 +16,12 @@
   font-family: "FiraGO", serif;
 }
 
+body {
+  background: white;
+}
+
 .container {
-  max-width: 1320px;
+  max-width: 1550px;
   margin: 0 auto;
 }
 
@@ -28,8 +32,16 @@
   font-size: 16px;
   color: $black;
   cursor: pointer;
-  font-weight: normal;
   border-radius: 5px;
+}
+
+.btn-tertiary {
+  padding: 8px 48px;
+  background: $purple;
+  color: white;
+  border-radius: 20px;
+  font-size: 16px;
+  cursor: pointer;
 }
 
 .btn-secondary {
@@ -40,6 +52,28 @@
   display: flex;
   column-gap: 5px;
   border-radius: 5px;
-  font-weight: normal;
   cursor: pointer;
+}
+
+.task-step {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 54px;
+  border-radius: 10px;
+  font-size: 17px;
+  color: white;
+  &.start {
+    background: $start;
+  }
+  &.progress {
+    background: $progress;
+  }
+  &.testing {
+    background: $testing;
+  }
+  &.finished {
+    background: $finished;
+  }
 }

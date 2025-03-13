@@ -1,0 +1,18 @@
+<div class="tasks-items">
+  <div class="tasks">
+    <div class="task-step start">დასაწყები</div>
+    <app-task-card [start]="true"></app-task-card>
+  </div>
+  <div class="tasks">
+    <div class="task-step progress">პროგრესში</div>
+    <app-task-card [progress]="true"></app-task-card>
+  </div>
+  <div class="tasks">
+    <div class="task-step testing">მზად ტესტირებისთვის</div>
+    <app-task-card [testing]="true"></app-task-card>
+  </div>
+  <div class="tasks">
+    <div class="task-step finished">დასრულებული</div>
+    <app-task-card [finished]="true"></app-task-card>
+  </div>
+</div>
