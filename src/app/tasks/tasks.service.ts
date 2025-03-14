@@ -22,9 +22,17 @@ export class TasksService {
     return this.http.get<Priority[]>(environment.apiUrl + 'priorities');
   }
 
+  public getEmployees(): Observable<Employee[]> {
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + this.apiToken
+    });
+
+    const options = { headers: headers };
+    return this.http.get<Employee[]>(environment.apiUrl + 'employees', options);
+  }
+
   public addEmployee(employee: FormData): Observable<Employee[]> {
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.apiToken
     });
 

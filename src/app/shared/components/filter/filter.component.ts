@@ -5,6 +5,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 import {FormsModule} from '@angular/forms';
 import {Department} from '../../models/department';
 import {Priority} from '../../models/priority';
+import {Employee} from '../../models/employee';
 
 @Component({
   selector: 'app-filter',
@@ -24,6 +25,7 @@ export class FilterComponent implements OnInit {
   public showEmployeeFilter = false;
   public departments!: Department[];
   public priorities!: Priority[];
+  public employees!: Employee[];
 
 
   constructor(private taskService: TasksService, private elementRef: ElementRef) {
@@ -63,6 +65,7 @@ export class FilterComponent implements OnInit {
   public ngOnInit() {
     this.getDepartments();
     this.getPriorities();
+    this.getEmployees();
   }
 
   public getDepartments() {
@@ -71,10 +74,15 @@ export class FilterComponent implements OnInit {
     })
   }
 
+  public getEmployees() {
+    this.taskService.getEmployees().subscribe((res) => {
+      this.employees = res;
+    })
+  }
+
   public getPriorities() {
     this.taskService.getPriorities().subscribe((res) => {
       this.priorities = res;
-      console.log(this.priorities);
     })
   }
 }

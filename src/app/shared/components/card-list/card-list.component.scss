@@ -6,8 +6,8 @@
   margin-top: 25px;
   .tasks {
     width: 100%;
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     row-gap: 30px;
   }
 }

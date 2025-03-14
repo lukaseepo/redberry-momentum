@@ -5,6 +5,7 @@ import {SelectModule} from 'primeng/select';
 import {TasksService} from '../../../tasks/tasks.service';
 import {Department} from '../../models/department';
 import {MatDialogClose} from '@angular/material/dialog';
+import {ToastService} from '../../../core/services/toast.service';
 
 @Component({
   selector: 'app-employee-add',
@@ -28,7 +29,7 @@ export class EmployeeAddComponent implements OnInit {
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
 
 
-  constructor(private fb: FormBuilder, private taskService: TasksService) {
+  constructor(private fb: FormBuilder, private taskService: TasksService, private toastService: ToastService) {
   }
 
   public onFileSelected(event: any): void {
@@ -85,6 +86,11 @@ export class EmployeeAddComponent implements OnInit {
       this.imageNotUploaded = true;
     }
 
+    if(employeeData.avatar.size > 600000) {
+      this.toastService.showError("ავატარის ზომა არ უნდა აღემატებოდეს 600kb-ს");
+      return;
+    }
+
     if(this.employeeAddForm.valid) {
       const formData = new FormData();
 
@@ -94,8 +100,8 @@ export class EmployeeAddComponent implements OnInit {
 
       formData.append('avatar', employeeData.avatar, employeeData.avatar.name);
 
-      this.taskService.addEmployee(formData).subscribe((res) => {
-        console.log(res);
+      this.taskService.addEmployee(formData).subscribe(() => {
+        this.toastService.showSuccess("თანამშროემლი წარმატებით დაემატა");
       })
     }
   }

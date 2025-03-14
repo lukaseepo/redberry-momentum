@@ -31,4 +31,20 @@
   border-top: 0 !important;
 }
 
+.p-toast-detail {
+  color: $black !important;
+  padding-left: 10px;
+}
+
+.p-toast-message-icon {
+  transform: translateY(4px);
+  .p-iconwrapper {
+    svg {
+      width: 30px;
+      height: 20px;
+    }
+  }
+}
+
+
 

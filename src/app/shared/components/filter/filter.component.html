@@ -20,7 +20,14 @@
           }
         </div>
       } @else if (showEmployeeFilter) {
-        <h3>Employees</h3>
+        <div class="checkbox-wrapper">
+          @for (employee of employees; track employee.id) {
+            <div class="checkbox">
+              <p-checkbox  inputId="prior{{employee.id}}" [binary]="true" />
+              <label for="prior{{employee.id}}">{{employee.name + ' ' + employee.surname}}</label>
+            </div>
+          }
+        </div>
       }
       <div class="button-wrapper">
         <button class="btn-tertiary">
