@@ -10,8 +10,5 @@ import {NgOptimizedImage} from '@angular/common';
   styleUrl: './task-card.component.scss'
 })
 export class TaskCardComponent {
-  @Input() public start = false;
-  @Input() public finished = false;
-  @Input() public progress = false;
-  @Input() public testing = false;
+  @Input() public taskCardClass = '';
 }

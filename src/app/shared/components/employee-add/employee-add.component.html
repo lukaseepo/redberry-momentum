@@ -1,0 +1,110 @@
+<div class="employee-add-wrapper">
+   <div class="employee-add-items">
+       <div mat-dialog-close class="close">
+         <img ngSrc="/assets/images/icons/close.svg" alt="" height="40" width="40">
+       </div>
+       <div class="title">
+         <h3>თანამშრომლის დამატება</h3>
+       </div>
+       <form [formGroup]="employeeAddForm">
+         <div class="input-wrapper">
+           <div class="input">
+             <label>სახელი*</label>
+             <input formControlName="name" type="text">
+             <div class="instructions">
+               <div class="instruction"
+                    [class.instruction-valid]="employeeAddForm.get('name')?.value['length'] >= 2 && (employeeAddForm.get('name')?.touched || employeeAddForm.get('name')?.dirty) && !employeeAddForm.get('name')?.errors?.['pattern']"
+                    [class.instruction-invalid]="employeeAddForm.get('name')?.value['length'] < 2 && (employeeAddForm.get('name')?.touched || employeeAddForm.get('name')?.dirty) || employeeAddForm.get('name')?.errors?.['pattern']">
+
+                 @if (employeeAddForm.get('name')?.value['length'] >= 2 && (employeeAddForm.get('name')?.touched || employeeAddForm.get('name')?.dirty)  && !employeeAddForm.get('name')?.errors?.['pattern']) {
+                   <img ngSrc="/assets/images/icons/check-valid.svg" alt="" height="16" width="16">
+                 } @else if (employeeAddForm.get('name')?.value['length'] < 2 && (employeeAddForm.get('name')?.touched || employeeAddForm.get('name')?.dirty) || employeeAddForm.get('name')?.errors?.['pattern']) {
+                   <img ngSrc="/assets/images/icons/check-invalid.svg" alt="" height="16" width="16">
+                 } @else {
+                   <img ngSrc="/assets/images/icons/check.svg" alt="" height="16" width="16">
+                 }
+                 მინიმუმ 2 სიმბოლო
+               </div>
+               <div class="instruction"
+                    [class.instruction-valid]="(employeeAddForm.get('name')?.value['length'] <= 255 && employeeAddForm.get('name')?.value['length'] >= 2) && (employeeAddForm.get('name')?.touched || employeeAddForm.get('name')?.dirty) && !employeeAddForm.get('name')?.errors?.['pattern']"
+                    [class.instruction-invalid]="(employeeAddForm.get('name')?.value['length'] > 255 || employeeAddForm.get('name')?.value['length'] < 2)  && (employeeAddForm.get('name')?.touched || employeeAddForm.get('name')?.dirty) || employeeAddForm.get('name')?.errors?.['pattern']">
+                 @if ((employeeAddForm.get('name')?.value['length'] <= 255 && employeeAddForm.get('name')?.value['length'] >= 2) && (employeeAddForm.get('name')?.touched || employeeAddForm.get('name')?.dirty) && !employeeAddForm.get('name')?.errors?.['pattern']) {
+                   <img ngSrc="/assets/images/icons/check-valid.svg" alt="" height="16" width="16">
+                 } @else if ((employeeAddForm.get('name')?.value['length'] > 255 || employeeAddForm.get('name')?.value['length'] < 2)  && (employeeAddForm.get('name')?.touched || employeeAddForm.get('name')?.dirty) || employeeAddForm.get('name')?.errors?.['pattern']) {
+                   <img ngSrc="/assets/images/icons/check-invalid.svg" alt="" height="16" width="16">
+                 } @else {
+                   <img ngSrc="/assets/images/icons/check.svg" alt="" height="16" width="16">
+                 }
+                 მაქსიმუმ 255 სიმბოლო
+               </div>
+             </div>
+           </div>
+           <div class="input">
+             <label>გვარი*</label>
+             <input formControlName="surname" type="text">
+             <div class="instructions">
+               <div class="instruction"
+                    [class.instruction-valid]="employeeAddForm.get('surname')?.value['length'] >= 2 && (employeeAddForm.get('surname')?.touched || employeeAddForm.get('surname')?.dirty) && !employeeAddForm.get('surname')?.errors?.['pattern']"
+                    [class.instruction-invalid]="employeeAddForm.get('surname')?.value['length'] < 2 && (employeeAddForm.get('surname')?.touched || employeeAddForm.get('surname')?.dirty) || employeeAddForm.get('surname')?.errors?.['pattern']">
+
+                 @if (employeeAddForm.get('surname')?.value['length'] >= 2 && (employeeAddForm.get('surname')?.touched || employeeAddForm.get('surname')?.dirty)  && !employeeAddForm.get('surname')?.errors?.['pattern']) {
+                   <img ngSrc="/assets/images/icons/check-valid.svg" alt="" height="16" width="16">
+                 } @else if (employeeAddForm.get('surname')?.value['length'] < 2 && (employeeAddForm.get('surname')?.touched || employeeAddForm.get('surname')?.dirty) || employeeAddForm.get('surname')?.errors?.['pattern']) {
+                   <img ngSrc="/assets/images/icons/check-invalid.svg" alt="" height="16" width="16">
+                 } @else {
+                   <img ngSrc="/assets/images/icons/check.svg" alt="" height="16" width="16">
+                 }
+                 მინიმუმ 2 სიმბოლო
+               </div>
+               <div class="instruction"
+                    [class.instruction-valid]="(employeeAddForm.get('surname')?.value['length'] <= 255 && employeeAddForm.get('surname')?.value['length'] >= 2) && (employeeAddForm.get('surname')?.touched || employeeAddForm.get('surname')?.dirty) && !employeeAddForm.get('surname')?.errors?.['pattern']"
+                    [class.instruction-invalid]="(employeeAddForm.get('surname')?.value['length'] > 255 || employeeAddForm.get('surname')?.value['length'] < 2)  && (employeeAddForm.get('surname')?.touched || employeeAddForm.get('surname')?.dirty) || employeeAddForm.get('surname')?.errors?.['pattern']">
+                 @if ((employeeAddForm.get('surname')?.value['length'] <= 255 && employeeAddForm.get('surname')?.value['length'] >= 2) && (employeeAddForm.get('surname')?.touched || employeeAddForm.get('surname')?.dirty) && !employeeAddForm.get('surname')?.errors?.['pattern']) {
+                   <img ngSrc="/assets/images/icons/check-valid.svg" alt="" height="16" width="16">
+                 } @else if ((employeeAddForm.get('surname')?.value['length'] > 255 || employeeAddForm.get('surname')?.value['length'] < 2)  && (employeeAddForm.get('surname')?.touched || employeeAddForm.get('surname')?.dirty) || employeeAddForm.get('surname')?.errors?.['pattern']) {
+                   <img ngSrc="/assets/images/icons/check-invalid.svg" alt="" height="16" width="16">
+                 } @else {
+                   <img ngSrc="/assets/images/icons/check.svg" alt="" height="16" width="16">
+                 }
+                 მაქსიმუმ 255 სიმბოლო
+               </div>
+             </div>
+           </div>
+         </div>
+         <div class="avatar-upload-wrapper">
+           <label>ავატარი*</label>
+           <div class="avatar-upload" [class.valid-avatar]="imagePreview" [class.invalid-avatar]="imageNotUploaded">
+             @if (imagePreview) {
+               <div class="image-preview">
+                 <img [src]="imagePreview" alt="" width="88" height="88">
+                 <div (click)="removeImage()" class="delete">
+                   <img ngSrc="/assets/images/icons/trash-bin.svg" alt="" height="14" width="14">
+                 </div>
+               </div>
+             } @else {
+               <input
+                 accept="image/*"
+                 class="file-upload-input"
+                 type="file"
+                 #fileInput
+                 (change)="onFileSelected($event)"
+               />
+               <div class="upload">
+                 <img ngSrc="/assets/images/icons/upload.svg" alt="" height="24" width="24">
+                 ატვირთე ფოტო
+               </div>
+             }
+           </div>
+         </div>
+         <div class="select">
+           <label>დეპარტამენტი*</label>
+           <p-select formControlName="department_id" [class.panel-shown]="selectPanelShown" (onShow)="selectPanelShown = true" (onHide)="selectPanelShown = false" appendTo="body" [panelStyleClass]="employeeAddForm.get('department_id')?.invalid && employeeAddForm.get('department_id')?.touched ?
+            'department-select-invalid' : employeeAddForm.get('department_id')?.valid && employeeAddForm.get('department_id')?.touched ? 'department-select-valid' : 'department-select'" [options]="departments" optionValue="id" optionLabel="name" />
+         </div>
+         <div class="button-wrapper">
+            <button mat-dialog-close class="btn-primary">გაუქმება</button>
+            <button (click)="submitForm()" class="btn-secondary">დაამატე თანამშრომელი</button>
+         </div>
+       </form>
+   </div>
+</div>

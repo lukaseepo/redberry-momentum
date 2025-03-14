@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
+import {MatDialog} from '@angular/material/dialog';
+import {EmployeeAddComponent} from '../employee-add/employee-add.component';
 
 @Component({
   selector: 'app-header',
@@ -12,4 +14,9 @@ import { NgOptimizedImage } from '@angular/common';
 })
 export class HeaderComponent {
 
+  constructor(private dialog: MatDialog) { }
+
+  public openEmployeeAddDialog() {
+    this.dialog.open(EmployeeAddComponent)
+  }
 }

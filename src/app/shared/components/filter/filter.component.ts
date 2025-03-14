@@ -1,4 +1,4 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {Component, ElementRef, HostListener, OnInit} from '@angular/core';
 import {TasksService} from '../../../tasks/tasks.service';
 import {NgOptimizedImage} from '@angular/common';
 import { CheckboxModule } from 'primeng/checkbox';
@@ -26,7 +26,18 @@ export class FilterComponent implements OnInit {
   public priorities!: Priority[];
 
 
-  constructor(private taskService: TasksService) {
+  constructor(private taskService: TasksService, private elementRef: ElementRef) {
+  }
+
+  @HostListener('document:click', ['$event'])
+  clickOutside(event: MouseEvent) {
+    const filterElement = (event.target as HTMLElement).closest('.filter');
+    if (!filterElement) {
+      this.showFilter = false;
+      this.showDepartmentFilter = false;
+      this.showPriorityFilter = false;
+      this.showEmployeeFilter = false;
+    }
   }
 
   public showFilterOptions (showDepartment: boolean, showPriority: boolean, showEmployee: boolean) {

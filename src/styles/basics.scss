@@ -21,7 +21,7 @@ body {
 }
 
 .container {
-  max-width: 1550px;
+  max-width: 1580px;
   margin: 0 auto;
 }
 
@@ -76,4 +76,24 @@ body {
   &.finished {
     background: $finished;
   }
+}
+
+input.ng-invalid.ng-touched {
+  border: 1px solid $invalid !important;
+}
+
+input.ng-dirty.ng-invalid {
+  border: 1px solid $invalid !important;
+}
+
+input.ng-valid {
+  border: 1px solid $valid !important;
+}
+
+.instruction-valid {
+  color: $valid !important;
+}
+
+.instruction-invalid {
+  color: $invalid !important;
 }

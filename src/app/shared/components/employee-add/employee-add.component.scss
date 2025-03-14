@@ -1,0 +1,196 @@
+@import "variables";
+
+.employee-add-wrapper {
+  height: 766px;
+  width: 913px;
+  padding: 40px 50px 60px 50px;
+  background: white;
+  .employee-add-items {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+    padding-top: 70px;
+    position: relative;
+    .close {
+      position: absolute;
+      top: 0;
+      cursor: pointer;
+      right: 0;
+    }
+
+    form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      padding-top: 55px;
+      row-gap: 45px;
+
+      .button-wrapper {
+        width: 100%;
+        display: flex;
+        justify-content: end;
+        column-gap: 22px;
+        margin-top: 15px;
+      }
+
+      label {
+        color: $gray2;
+        font-size: 14px;
+      }
+
+      .select {
+        display: flex;
+        flex-direction: column;
+        row-gap: 5px;
+        ::ng-deep {
+          .p-iconwrapper {
+            svg {
+              width: 12px;
+              height: 12px;
+              color: $gray2;
+            }
+          }
+          .panel-shown {
+            border-bottom: 0 !important;
+            border-bottom-left-radius: 0 !important;
+            border-bottom-right-radius: 0 !important;
+          }
+          .p-select {
+            background: transparent;
+            height: 42px;
+            width: 381px;
+            align-items: center;
+            border: 1px solid $gray3;
+            &.ng-invalid.ng-touched {
+              border: 1px solid $invalid;
+            }
+            &.ng-valid.ng-touched {
+              border: 1px solid $valid;
+            }
+            .p-select-label {
+              color: $black;
+              font-size: 14px;
+              padding-left: 14px;
+            }
+          }
+        }
+      }
+
+      .avatar-upload-wrapper {
+        display: flex;
+        flex-direction: column;
+        row-gap: 5px;
+
+        .avatar-upload {
+          width: 100%;
+          height: 120px;
+          border: 1px dashed $gray3;
+          border-radius: 8px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          position: relative;
+
+          &.invalid-avatar {
+            border-color: $invalid !important;
+          }
+
+          &.valid-avatar {
+            border-color: $valid !important;
+          }
+
+          .image-preview {
+            width: 88px;
+            height: 88px;
+            border-radius: 50%;
+            position: relative;
+            .delete {
+              width: 24px;
+              height: 24px;
+              right: 0;
+              bottom: -3px;
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              background: white;
+              border: 1px solid $gray4;
+              position: absolute;
+            }
+            img {
+              border-radius: 50%;
+            }
+          }
+
+          .file-upload-input {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            opacity: 0;
+          }
+
+          .upload {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            row-gap: 10px;
+            font-size: 14px;
+            color: $gray2;
+          }
+        }
+      }
+
+      .input-wrapper {
+        display: flex;
+        width: 100%;
+        column-gap: 50px;
+        justify-content: space-between;
+
+        .input {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          row-gap: 5px;
+
+          .instructions {
+            display: flex;
+            flex-direction: column;
+
+            .instruction {
+              display: flex;
+              align-items: center;
+              column-gap: 3px;
+              color: $gray4;
+              font-size: 10px;
+            }
+          }
+
+          input {
+            width: 100%;
+            height: 42px;
+            padding-left: 14px;
+            color: $black;
+            background: transparent;
+            border: 1px solid $gray3;
+            border-radius: 6px;
+          }
+        }
+      }
+    }
+
+    .title {
+      display: flex;
+      width: 100%;
+      justify-content: center;
+
+      h3 {
+        font-size: 32px;
+        color: $black;
+      }
+    }
+  }
+}
