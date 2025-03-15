@@ -1,0 +1,215 @@
+@import "variables";
+
+:host .task-add-section {
+  width: 100%;
+  background: white;
+  padding-top: 45px;
+  padding-bottom: 45px;
+  .task-add-items {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-row-gap: 55px;
+    .task-add-form {
+      width: 100%;
+      height: 900px;
+      border-radius: 4px;
+      padding-top: 71px;
+      padding-left: 55px;
+      border: 1px solid #DDD2FF;
+      background: $gray5;
+      .task-add-form-container {
+        max-width: 1200px;
+        form {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          row-gap: 65px;
+          .button-wrapper {
+            display: flex;
+            justify-content: end;
+            width: 100%;
+            padding-top: 50px;
+          }
+          label {
+            color: $gray2;
+            font-size: 14px;
+          }
+          .input-wrapper {
+            display: flex;
+            width: 100%;
+            column-gap: 175px;
+            justify-content: space-between;
+            .double-select {
+              display: flex;
+              width: 100%;
+              column-gap: 32px;
+            }
+
+            .select {
+              display: flex;
+              flex-direction: column;
+              row-gap: 5px;
+              width: 100%;
+              ::ng-deep {
+                .p-iconwrapper {
+                  svg {
+                    width: 12px;
+                    height: 12px;
+                    color: $gray2;
+                  }
+                }
+                .p-select {
+                  background: white;
+                  height: 42px;
+                  width: 100%;
+                  align-items: center;
+                  border: 1px solid $gray3;
+                  .option {
+                    display: flex;
+                    align-items: center;
+                    column-gap: 7px;
+                    &.center-none {
+                      align-items: normal !important;
+                    }
+                    .avatar {
+                      img {
+                        width: 30px;
+                        height: 30px;
+                        border-radius: 50%;
+                      }
+                    }
+                    .icon {
+                      img {
+                        width: 16px;
+                        height: 18px;
+                      }
+                    }
+                    img {
+                      object-fit: cover;
+                    }
+                  }
+                  &.ng-invalid.ng-touched {
+                    border: 1px solid $invalid;
+                  }
+                  &.ng-valid.ng-touched {
+                    border: 1px solid $valid;
+                  }
+                  .p-select-label {
+                    color: $black;
+                    font-size: 14px;
+                    padding-left: 14px;
+                  }
+                }
+              }
+            }
+
+            .input {
+              width: 100%;
+              display: flex;
+              flex-direction: column;
+              row-gap: 5px;
+              ::ng-deep {
+                .p-datepicker-input {
+                  background: white;
+                  border: 1px solid $gray3;
+                  border-left: 0;
+                  padding-left: 0;
+                  border-radius: 0 5px 5px 0;
+                  color: $black;
+                  font-size: 14px;
+                  height: 42px;
+                }
+
+                .p-datepicker-panel {
+                  background: white;
+                  .p-datepicker-weekday {
+                    color: $black2;
+                  }
+                  .p-datepicker-today {
+                    .p-datepicker-day {
+                      background: transparent;
+                    }
+                  }
+                  .p-datepicker-other-month {
+                    .p-datepicker-day {
+                      color: $gray4;
+                    }
+                  }
+                  .p-datepicker-header {
+                    background: white;
+                  }
+                  .p-datepicker-day {
+                    color: $black2;
+                    width: 32px;
+                    height: 32px;
+                    border-radius: 2px;
+                    &.p-datepicker-day-selected {
+                      background: $purple;
+                      color: white;
+                    }
+                    &:hover {
+                      background: $purple;
+                      color: white;
+                    }
+                  }
+                }
+                .p-inputwrapper {
+                  width: 318px;
+                  flex-direction: row-reverse;
+                }
+                .p-datepicker-dropdown {
+                  background: white;
+                  border: 1px solid $gray3;
+                  border-radius: 5px 0 0 5px;
+                  border-right: 0;
+                  color: $gray6;
+                }
+              }
+
+              .instructions {
+                display: flex;
+                flex-direction: column;
+
+                .instruction {
+                  display: flex;
+                  align-items: center;
+                  column-gap: 3px;
+                  color: $gray4;
+                  font-size: 10px;
+                }
+              }
+
+              textarea {
+                color: $black;
+                background: white;
+                border: 1px solid $gray3;
+                border-radius: 6px;
+                padding-left: 14px;
+                padding-top: 14px;
+                resize: none;
+                height: 133px;
+              }
+
+              input {
+                width: 100%;
+                height: 42px;
+                padding-left: 14px;
+                color: $black;
+                background: white;
+                border: 1px solid $gray3;
+                border-radius: 6px;
+              }
+            }
+          }
+        }
+      }
+    }
+    .title {
+      width: 100%;
+      h3 {
+        color: $black;
+        font-size: 34px;
+      }
+    }
+  }
+}

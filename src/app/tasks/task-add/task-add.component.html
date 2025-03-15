@@ -1,0 +1,142 @@
+<section class="task-add-section">
+  <div class="container">
+    <div class="task-add-items">
+      <div class="title">
+        <h3>შექმენი ახალი დავალება</h3>
+      </div>
+      <div class="task-add-form">
+        <div class="task-add-form-container">
+          <form [formGroup]="taskAddForm">
+            <div class="input-wrapper">
+              <div class="input">
+                <label>სათაური*</label>
+                <input formControlName="name" type="text">
+                <div class="instructions">
+                  <div
+                    class="instruction"
+                    [class.instruction-valid]="taskAddForm.get('name')?.value['length'] >= 3 && (taskAddForm.get('name')?.touched || taskAddForm.get('name')?.dirty) && !taskAddForm.get('name')?.errors?.['pattern']"
+                    [class.instruction-invalid]="taskAddForm.get('name')?.value['length'] < 3 && (taskAddForm.get('name')?.touched || taskAddForm.get('name')?.dirty) || taskAddForm.get('name')?.errors?.['pattern']"
+                  >
+                    მინიმუმ 3 სიმბოლო
+                  </div>
+                  <div
+                    class="instruction"
+                    [class.instruction-valid]="(taskAddForm.get('name')?.value['length'] <= 255 && taskAddForm.get('name')?.value['length'] >= 3) && (taskAddForm.get('name')?.touched || taskAddForm.get('name')?.dirty) && !taskAddForm.get('name')?.errors?.['pattern']"
+                    [class.instruction-invalid]="(taskAddForm.get('name')?.value['length'] > 255 || taskAddForm.get('name')?.value['length'] < 3)  && (taskAddForm.get('name')?.touched || taskAddForm.get('name')?.dirty) || taskAddForm.get('name')?.errors?.['pattern']">
+                    მაქსიმუმ 255 სიმბოლო
+                  </div>
+                </div>
+              </div>
+              <div class="select">
+                <label>დეპარტამენტი*</label>
+                <p-select
+                  formControlName="department_id"
+                  panelStyleClass="select-panel"
+                  [options]="departments"
+                  appendTo="body"
+                  optionValue="id"
+                  optionLabel="name"/>
+              </div>
+            </div>
+            <div class="input-wrapper">
+              <div class="input">
+                <label>აღწერა</label>
+                <textarea formControlName="description"></textarea>
+                <div class="instructions">
+                  <div
+                    class="instruction"
+                    [class.instruction-valid]="(taskAddForm.get('description')?.touched || taskAddForm.get('description')?.dirty) && !taskAddForm.get('description')?.errors?.['pattern']"
+                    [class.instruction-invalid]="(taskAddForm.get('description')?.touched || taskAddForm.get('description')?.dirty) && taskAddForm.get('description')?.errors?.['pattern']"
+                  >
+                    მინიმუმ 4 სიტყვა
+                  </div>
+                  <div
+                    class="instruction"
+                    [class.instruction-valid]="taskAddForm.get('description')?.value['length'] <= 255 && (taskAddForm.get('description')?.touched || taskAddForm.get('description')?.dirty) && !taskAddForm.get('description')?.errors?.['pattern']"
+                    [class.instruction-invalid]="taskAddForm.get('description')?.value['length'] > 255  && (taskAddForm.get('description')?.touched || taskAddForm.get('description')?.dirty) || taskAddForm.get('description')?.errors?.['pattern']">
+                    მაქსიმუმ 255 სიმბოლო
+                  </div>
+                </div>
+              </div>
+              <div class="select">
+                <label>პასუხისმგებელი თანამშრომელი*</label>
+                <p-select
+                  [options]="employees"
+                  panelStyleClass="select-panel"
+                  formControlName="employee_id"
+                  appendTo="body"
+                  optionValue="id"
+                >
+                  <ng-template let-employee pTemplate="selectedItem">
+                    <div class="option">
+                      <div class="avatar">
+                        <img [src]="employee.avatar" alt="">
+                      </div>
+                      {{ employee.name }}
+                    </div>
+                  </ng-template>
+                  <ng-template let-employee pTemplate="item">
+                    <div class="option" >
+                      <div class="avatar">
+                        <img [src]="employee.avatar" alt="">
+                      </div>
+                      {{ employee.name }}
+                    </div>
+                  </ng-template>
+                </p-select>
+              </div>
+            </div>
+            <div class="input-wrapper">
+              <div class="double-select">
+                <div class="select">
+                  <label>პრიორიტეტი*</label>
+                  <p-select
+                    panelStyleClass="select-panel"
+                    formControlName="priority_id"
+                    [options]="priorities"
+                    appendTo="body"
+                    optionValue="id"
+                    optionLabel="name">
+                    <ng-template let-priority pTemplate="selectedItem">
+                      <div class="option center-none">
+                        <div class="icon">
+                          <img [src]="priority.icon" alt="">
+                        </div>
+                        {{ priority.name }}
+                      </div>
+                    </ng-template>
+                    <ng-template let-priority pTemplate="item">
+                      <div class="option center-none" >
+                        <div class="icon">
+                          <img [src]="priority.icon" alt="">
+                        </div>
+                        {{ priority.name }}
+                      </div>
+                    </ng-template>
+                  </p-select>
+                </div>
+                <div class="select">
+                  <label>სტატუსი*</label>
+                  <p-select
+                    formControlName="status_id"
+                    [options]="statuses"
+                    panelStyleClass="select-panel"
+                    appendTo="body"
+                    optionValue="id"
+                    optionLabel="name"/>
+                </div>
+              </div>
+              <div class="input">
+                <label>დედლაინი</label>
+                <p-datepicker formControlName="due_date" [showIcon]="true" [showOnFocus]="false"></p-datepicker>
+              </div>
+            </div>
+            <div class="button-wrapper">
+              <button (click)="addTask()" class="btn-secondary">დავალების შექმნა</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

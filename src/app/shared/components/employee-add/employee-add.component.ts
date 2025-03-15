@@ -18,12 +18,11 @@ import {ToastService} from '../../../core/services/toast.service';
   ],
   standalone: true,
   templateUrl: './employee-add.component.html',
-  styleUrl: './employee-add.component.scss'
+  styleUrl: './employee-add.component.scss',
 })
 export class EmployeeAddComponent implements OnInit {
   public employeeAddForm: FormGroup = new FormGroup({});
   public imagePreview: string | null = null;
-  public selectPanelShown = false;
   public imageNotUploaded = false;
   public departments!: Department[];
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;

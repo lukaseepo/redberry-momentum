@@ -5,6 +5,8 @@ import {Observable} from 'rxjs';
 import {Department} from '../shared/models/department';
 import {Priority} from '../shared/models/priority';
 import {Employee} from '../shared/models/employee';
+import {Status} from '../shared/models/status';
+import {Task, TaskAdd} from '../shared/models/task';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +22,10 @@ export class TasksService {
 
   public getPriorities(): Observable<Priority[]> {
     return this.http.get<Priority[]>(environment.apiUrl + 'priorities');
+  }
+
+  public getStatuses(): Observable<Status[]> {
+    return this.http.get<Status[]>(environment.apiUrl + 'statuses');
   }
 
   public getEmployees(): Observable<Employee[]> {
@@ -39,5 +45,15 @@ export class TasksService {
     const options = { headers: headers };
 
     return this.http.post<Employee[]>(environment.apiUrl + 'employees', employee, options);
+  }
+
+  public addTask(task: TaskAdd): Observable<Task[]> {
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + this.apiToken
+    });
+
+    const options = { headers: headers };
+
+    return this.http.post<Task[]>(environment.apiUrl + 'tasks', task, options);
   }
 }

@@ -98,8 +98,12 @@
          </div>
          <div class="select">
            <label>დეპარტამენტი*</label>
-           <p-select formControlName="department_id" [class.panel-shown]="selectPanelShown" (onShow)="selectPanelShown = true" (onHide)="selectPanelShown = false" appendTo="body" [panelStyleClass]="employeeAddForm.get('department_id')?.invalid && employeeAddForm.get('department_id')?.touched ?
-            'department-select-invalid' : employeeAddForm.get('department_id')?.valid && employeeAddForm.get('department_id')?.touched ? 'department-select-valid' : 'department-select'" [options]="departments" optionValue="id" optionLabel="name" />
+           <p-select formControlName="department_id"
+                     appendTo="body"
+                     panelStyleClass="select-panel"
+                     [options]="departments"
+                     optionValue="id"
+                     optionLabel="name" />
          </div>
          <div class="button-wrapper">
             <button mat-dialog-close class="btn-primary">გაუქმება</button>
