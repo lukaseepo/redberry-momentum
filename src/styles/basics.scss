@@ -78,17 +78,25 @@ body {
   }
 }
 
-input.ng-invalid.ng-touched {
-  border: 1px solid $invalid !important;
+input, textarea {
+  &.ng-invalid.ng-touched {
+    border: 1px solid $invalid !important;
+  }
 }
 
-input.ng-dirty.ng-invalid {
-  border: 1px solid $invalid !important;
+input, textarea {
+  &.ng-invalid.ng-touched {
+    border: 1px solid $invalid !important;
+  }
 }
 
-input.ng-valid {
-  border: 1px solid $valid !important;
+input, textarea {
+  &.ng-valid.ng-touched {
+    border: 1px solid $valid !important;
+  }
 }
+
+
 
 .instruction-valid {
   color: $valid !important;

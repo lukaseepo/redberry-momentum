@@ -65,14 +65,27 @@
                   panelStyleClass="select-panel"
                   formControlName="employee_id"
                   appendTo="body"
+                  [disabled]="true"
+                  #employeePanel
                   optionValue="id"
                 >
+                  <ng-template pTemplate="empty">
+                    <div class="option">
+                      თანამშრომლები ამ დეპარტამენტში ვერ მოიძებნა
+                    </div>
+                  </ng-template>
+                  <ng-template pTemplate="header">
+                    <div class="header-button" (click)="openAddEmployeeDialog(); employeePanel.hide()">
+                      <img ngSrc="/assets/images/icons/plus-circle.svg" alt="" height="20" width="20">
+                      დაამატე თანამშრომელი
+                    </div>
+                  </ng-template>
                   <ng-template let-employee pTemplate="selectedItem">
                     <div class="option">
                       <div class="avatar">
                         <img [src]="employee.avatar" alt="">
                       </div>
-                      {{ employee.name }}
+                      {{ employee.name + ' ' + employee.surname }}
                     </div>
                   </ng-template>
                   <ng-template let-employee pTemplate="item">
@@ -80,7 +93,7 @@
                       <div class="avatar">
                         <img [src]="employee.avatar" alt="">
                       </div>
-                      {{ employee.name }}
+                      {{ employee.name + ' ' + employee.surname }}
                     </div>
                   </ng-template>
                 </p-select>
@@ -98,7 +111,7 @@
                     optionValue="id"
                     optionLabel="name">
                     <ng-template let-priority pTemplate="selectedItem">
-                      <div class="option center-none">
+                      <div class="option">
                         <div class="icon">
                           <img [src]="priority.icon" alt="">
                         </div>
@@ -106,7 +119,7 @@
                       </div>
                     </ng-template>
                     <ng-template let-priority pTemplate="item">
-                      <div class="option center-none" >
+                      <div class="option" >
                         <div class="icon">
                           <img [src]="priority.icon" alt="">
                         </div>
@@ -127,8 +140,8 @@
                 </div>
               </div>
               <div class="input">
-                <label>დედლაინი</label>
-                <p-datepicker formControlName="due_date" [showIcon]="true" [showOnFocus]="false"></p-datepicker>
+                <label>დედლაინი*</label>
+                <p-datepicker dateFormat="dd/mm/yy"  placeholder="DD/MM/YYYY" [minDate]="minDate" formControlName="due_date" [showIcon]="true" [showOnFocus]="false"></p-datepicker>
               </div>
             </div>
             <div class="button-wrapper">

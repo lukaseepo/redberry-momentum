@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable, signal} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment.dev';
 import {Observable} from 'rxjs';
@@ -6,13 +6,15 @@ import {Department} from '../shared/models/department';
 import {Priority} from '../shared/models/priority';
 import {Employee} from '../shared/models/employee';
 import {Status} from '../shared/models/status';
-import {Task, TaskAdd} from '../shared/models/task';
+import {Task} from '../shared/models/task';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TasksService {
   private apiToken = '9e6dcd97-1d26-4469-b686-6b76c8d9a2bf';
+  public employeeUpdateSignal = signal<number>(0);
+
 
   constructor(private http: HttpClient) { }
 
@@ -47,7 +49,7 @@ export class TasksService {
     return this.http.post<Employee[]>(environment.apiUrl + 'employees', employee, options);
   }
 
-  public addTask(task: TaskAdd): Observable<Task[]> {
+  public addTask(task: Task): Observable<Task[]> {
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + this.apiToken
     });
@@ -55,5 +57,15 @@ export class TasksService {
     const options = { headers: headers };
 
     return this.http.post<Task[]>(environment.apiUrl + 'tasks', task, options);
+  }
+
+  public getTasks(): Observable<Task[]> {
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + this.apiToken
+    });
+
+    const options = { headers: headers };
+
+    return this.http.get<Task[]>(environment.apiUrl + 'tasks', options);
   }
 }

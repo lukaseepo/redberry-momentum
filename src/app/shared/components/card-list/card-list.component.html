@@ -1,20 +1,20 @@
 <div class="tasks-items">
   <div class="tasks">
-    <div class="task-step start">დასაწყები</div>
-    <app-task-card taskCardClass="start"></app-task-card>
-    <app-task-card taskCardClass="start"></app-task-card>
-    <app-task-card taskCardClass="start"></app-task-card>
+    <div class="task-step start">{{ statuses[0].name }}</div>
+    @for (task of allTasks; track task.id) {
+      <app-task-card taskCardClass="start"></app-task-card>
+    }
   </div>
   <div class="tasks">
-    <div class="task-step progress">პროგრესში</div>
+    <div class="task-step progress">{{ statuses[1].name }}</div>
     <app-task-card taskCardClass="progress"></app-task-card>
   </div>
   <div class="tasks">
-    <div class="task-step testing">მზად ტესტირებისთვის</div>
+    <div class="task-step testing">{{ statuses[2].name }}</div>
     <app-task-card taskCardClass="testing"></app-task-card>
   </div>
   <div class="tasks">
-    <div class="task-step finished">დასრულებული</div>
+    <div class="task-step finished">{{ statuses[3].name }}</div>
     <app-task-card taskCardClass="finished"></app-task-card>
   </div>
 </div>

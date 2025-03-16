@@ -1,10 +1,10 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
 import {NgOptimizedImage} from '@angular/common';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {SelectModule} from 'primeng/select';
 import {TasksService} from '../../../tasks/tasks.service';
 import {Department} from '../../models/department';
-import {MatDialogClose} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialogClose} from '@angular/material/dialog';
 import {ToastService} from '../../../core/services/toast.service';
 
 @Component({
@@ -28,7 +28,7 @@ export class EmployeeAddComponent implements OnInit {
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
 
 
-  constructor(private fb: FormBuilder, private taskService: TasksService, private toastService: ToastService) {
+  constructor(private fb: FormBuilder, private taskService: TasksService, private toastService: ToastService, @Inject(MAT_DIALOG_DATA) public data: {department_id: string}) {
   }
 
   public onFileSelected(event: any): void {
@@ -50,6 +50,12 @@ export class EmployeeAddComponent implements OnInit {
       avatar: ['', Validators.required],
       department_id: ['', Validators.required],
     })
+
+    if(this.data?.department_id) {
+      this.employeeAddForm.patchValue({
+        department_id: this.data.department_id
+      })
+    }
   }
 
   public removeImage(): void {
@@ -101,6 +107,7 @@ export class EmployeeAddComponent implements OnInit {
 
       this.taskService.addEmployee(formData).subscribe(() => {
         this.toastService.showSuccess("თანამშროემლი წარმატებით დაემატა");
+        this.taskService.employeeUpdateSignal.update(count => count + 1);
       })
     }
   }

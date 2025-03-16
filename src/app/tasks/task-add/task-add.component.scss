@@ -68,9 +68,6 @@
                     display: flex;
                     align-items: center;
                     column-gap: 7px;
-                    &.center-none {
-                      align-items: normal !important;
-                    }
                     .avatar {
                       img {
                         width: 30px;
@@ -79,6 +76,7 @@
                       }
                     }
                     .icon {
+                      transform: translateY(2px);
                       img {
                         width: 16px;
                         height: 18px;
@@ -109,19 +107,60 @@
               flex-direction: column;
               row-gap: 5px;
               ::ng-deep {
+                p-datepicker {
+                  .p-datepicker {
+                    border: 1px solid $gray;
+                    border-radius: 5px;
+                  }
+                  &.ng-valid.ng-dirty {
+                    .p-datepicker {
+                      border: 1px solid $valid;
+                    }
+                  }
+                  &.ng-invalid.ng-dirty {
+                    .p-datepicker {
+                      border: 1px solid $invalid;
+                    }
+                  }
+                  &.ng-valid.ng-touched {
+                    .p-datepicker {
+                      border: 1px solid $valid;
+                    }
+                  }
+                  &.ng-invalid.ng-touched {
+                    .p-datepicker {
+                      border: 1px solid $invalid;
+                    }
+                  }
+                }
                 .p-datepicker-input {
                   background: white;
-                  border: 1px solid $gray3;
-                  border-left: 0;
-                  padding-left: 0;
+                  border: 0;
                   border-radius: 0 5px 5px 0;
                   color: $black;
                   font-size: 14px;
                   height: 42px;
+                  padding-left: 0;
                 }
 
                 .p-datepicker-panel {
                   background: white;
+                  border: 0;
+                  .p-datepicker-year-selected {
+                    background: $purple;
+                    color: white !important;
+                  }
+                  .p-datepicker-title {
+                    column-gap: 4px;
+                    button {
+                      color: $black;
+                      padding: 0;
+                      &:hover {
+                        background: transparent;
+                        color: $black;
+                      }
+                    }
+                  }
                   .p-datepicker-weekday {
                     color: $black2;
                   }
@@ -135,8 +174,36 @@
                       color: $gray4;
                     }
                   }
+                  .p-datepicker-decade {
+                    color: $black;
+                  }
+                  .p-datepicker-year {
+                    color: $black;
+                    &:hover {
+                      background: $purple;
+                      color: white;
+                    }
+                  }
+                  .p-datepicker-month {
+                    color: $black;
+                    &:hover {
+                      background: $purple;
+                      color: white;
+                    }
+                  }
                   .p-datepicker-header {
                     background: white;
+                    border-bottom: 0;
+                    .p-button {
+                      &:hover {
+                        background: transparent;
+                      }
+                    }
+                    .p-iconwrapper {
+                      svg {
+                        color: $black2;
+                      }
+                    }
                   }
                   .p-datepicker-day {
                     color: $black2;
@@ -159,9 +226,8 @@
                 }
                 .p-datepicker-dropdown {
                   background: white;
-                  border: 1px solid $gray3;
+                  border: 0;
                   border-radius: 5px 0 0 5px;
-                  border-right: 0;
                   color: $gray6;
                 }
               }
