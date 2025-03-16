@@ -59,6 +59,26 @@ export class TasksService {
     return this.http.post<Task[]>(environment.apiUrl + 'tasks', task, options);
   }
 
+  public getTaskById(id: number): Observable<Task> {
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + this.apiToken
+    });
+
+    const options = { headers: headers };
+
+    return this.http.get<Task>(environment.apiUrl + 'tasks/' + id, options);
+  }
+
+  public updateTaskById(id: number, task: {status_id: number}): Observable<Task> {
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + this.apiToken
+    });
+
+    const options = { headers: headers };
+
+    return this.http.put<Task>(environment.apiUrl + 'tasks/' + id, task, options);
+  }
+
   public getTasks(): Observable<Task[]> {
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + this.apiToken

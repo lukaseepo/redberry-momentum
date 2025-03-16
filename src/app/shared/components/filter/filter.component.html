@@ -13,7 +13,7 @@
       } @else if (showPriorityFilter) {
         <div class="checkbox-wrapper">
           @for (priority of priorities; track priority.id) {
-            <div class="checkbox">
+            <div class="checkbox purple">
               <p-checkbox  inputId="prior{{priority.id}}" [binary]="true" />
               <label for="prior{{priority.id}}">{{priority.name}}</label>
             </div>
@@ -22,9 +22,12 @@
       } @else if (showEmployeeFilter) {
         <div class="checkbox-wrapper">
           @for (employee of employees; track employee.id) {
-            <div class="checkbox">
+            <div class="checkbox purple">
               <p-checkbox  inputId="prior{{employee.id}}" [binary]="true" />
-              <label for="prior{{employee.id}}">{{employee.name + ' ' + employee.surname}}</label>
+              <div class="avatar-wrapper">
+                <img [src]="employee.avatar" width="28" height="28" alt="">
+                <label for="prior{{employee.id}}">{{employee.name + ' ' + employee.surname}}</label>
+              </div>
             </div>
           }
         </div>

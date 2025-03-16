@@ -17,6 +17,9 @@ import {Status} from '../../models/status';
 export class CardListComponent implements OnInit {
   public allTasks!: Task[];
   public startTasks!: Task[];
+  public progressTasks!: Task[];
+  public testingTasks!: Task[];
+  public finishedTasks!: Task[];
   public statuses!: Status[];
   constructor(private taskService: TasksService) { }
 
@@ -28,6 +31,10 @@ export class CardListComponent implements OnInit {
   public getAllTasks(): void {
     this.taskService.getTasks().subscribe((res) => {
       this.allTasks = res;
+      this.startTasks = this.allTasks.filter(task => task.status.id === 1);
+      this.progressTasks = this.allTasks.filter(task => task.status.id === 2);
+      this.testingTasks = this.allTasks.filter(task => task.status.id === 3);
+      this.finishedTasks = this.allTasks.filter(task => task.status.id === 4);
     })
   }
 

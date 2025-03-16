@@ -96,7 +96,39 @@ input, textarea {
   }
 }
 
-
+.department {
+  padding: 4px 10px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FF66A8;
+  color: white;
+  border-radius: 15px;
+  font-size: 12px;
+}
+.priority {
+  height: 26px;
+  display: flex;
+  column-gap: 5px;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 6px;
+  font-size: 12px;
+  border-radius: 4px;
+  &.low {
+    border: 1px solid $low-priority;
+    color: $low-priority;
+  }
+  &.medium {
+    border: 1px solid $medium-priority;
+    color: $medium-priority;
+  }
+  &.high {
+    border: 1px solid $high-priority;
+    color: $high-priority;
+  }
+}
 
 .instruction-valid {
   color: $valid !important;

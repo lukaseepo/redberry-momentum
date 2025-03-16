@@ -4,7 +4,7 @@ import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} fr
 import {SelectModule} from 'primeng/select';
 import {TasksService} from '../../../tasks/tasks.service';
 import {Department} from '../../models/department';
-import {MAT_DIALOG_DATA, MatDialogClose} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogClose} from '@angular/material/dialog';
 import {ToastService} from '../../../core/services/toast.service';
 
 @Component({
@@ -28,7 +28,7 @@ export class EmployeeAddComponent implements OnInit {
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
 
 
-  constructor(private fb: FormBuilder, private taskService: TasksService, private toastService: ToastService, @Inject(MAT_DIALOG_DATA) public data: {department_id: string}) {
+  constructor(private fb: FormBuilder, private dialog: MatDialog, private taskService: TasksService, private toastService: ToastService, @Inject(MAT_DIALOG_DATA) public data: {department_id: string}) {
   }
 
   public onFileSelected(event: any): void {
@@ -107,6 +107,7 @@ export class EmployeeAddComponent implements OnInit {
 
       this.taskService.addEmployee(formData).subscribe(() => {
         this.toastService.showSuccess("თანამშროემლი წარმატებით დაემატა");
+        this.dialog.closeAll();
         this.taskService.employeeUpdateSignal.update(count => count + 1);
       })
     }

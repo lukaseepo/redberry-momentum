@@ -1,9 +1,9 @@
 import {Department} from './department';
 
 export interface Employee {
-  "name": String;
-  "surname": String;
+  "name": string;
+  "surname": string;
   "id": number;
-  "avatar": String;
+  "avatar": string;
   "department": Department;
 }

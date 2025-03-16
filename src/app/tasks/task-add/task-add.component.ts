@@ -1,11 +1,9 @@
 import {Component, effect, EffectRef, OnDestroy, OnInit} from '@angular/core';
 import {
-  AbstractControl,
   FormBuilder,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
-  ValidationErrors,
   Validators
 } from '@angular/forms';
 import {NgOptimizedImage} from '@angular/common';
@@ -106,6 +104,7 @@ export class TaskAddComponent implements OnInit, OnDestroy {
 
     this.taskAddForm.get('department_id')?.valueChanges.subscribe(() => {
       this.taskAddForm.get('employee_id')?.enable();
+      this.taskAddForm.get('employee_id')?.setValue('');
       this.employees = this.allEmployees.filter(employee => employee.department.id === this.taskAddForm.get('department_id')?.value);
     })
 
@@ -151,6 +150,7 @@ export class TaskAddComponent implements OnInit, OnDestroy {
        this.taskService.addTask(this.taskAddForm.value).subscribe(() => {
          this.router.navigate(['/']);
          this.toastService.showSuccess('თასქი წარმატებით დაემატა');
+         localStorage.removeItem('taskAddFormData');
        })
      }
   }

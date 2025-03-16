@@ -1,0 +1,119 @@
+@import "variables";
+
+.task-details-section {
+  width: 100%;
+  padding-top: 70px;
+  .task-details-items {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    .task-details {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      row-gap: 65px;
+      .details {
+        display: flex;
+        flex-direction: column;
+        row-gap: 30px;
+         h4 {
+           font-size: 24px;
+           color: $black3;
+         }
+        .info {
+          display: flex;
+          flex-direction: column;
+          row-gap: 45px;
+          .info-item {
+            display: flex;
+            column-gap: 80px;
+            align-items: center;
+            .select {
+              display: flex;
+              ::ng-deep {
+                .p-iconwrapper {
+                  svg {
+                    width: 12px;
+                    height: 12px;
+                    color: $gray2;
+                  }
+                }
+                .p-select {
+                  background: transparent;
+                  height: 42px;
+                  width: 259px;
+                  align-items: center;
+                  border: 1px solid $gray3;
+                  .p-select-label {
+                    color: $black;
+                    font-size: 14px;
+                    padding-left: 14px;
+                  }
+                }
+              }
+            }
+            .employee-avatar {
+              display: flex;
+              align-items: center;
+              column-gap: 10px;
+              .employee-info {
+                position: relative;
+                font-size: 14px;
+                color: $black2;
+                width: 100%;
+                span {
+                  color: $gray7;
+                  font-size: 11px;
+                  position: absolute;
+                  text-wrap: nowrap;
+                  top: -16px;
+                }
+              }
+              img {
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                object-fit: cover;
+              }
+            }
+            .item {
+              display: flex;
+              align-items: center;
+              column-gap: 10px;
+              font-size: 16px;
+              width: 175px;
+              color: $gray7;
+              span {
+                font-size: 14px;
+                color: $black2;
+              }
+            }
+          }
+        }
+      }
+      .task {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        h3 {
+          font-size: 34px;
+          color: $black;
+          padding-top: 13px;
+        }
+        p {
+          color: black;
+          font-size: 16px;
+          line-height: 24px;
+          padding-top: 25px;
+        }
+        .info {
+          display: flex;
+          align-items: center;
+          column-gap: 10px;
+        }
+      }
+    }
+    .comments {
+      width: 100%;
+    }
+  }
+}

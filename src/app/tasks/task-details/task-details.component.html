@@ -1,0 +1,90 @@
+<section class="task-details-section">
+  <div class="container">
+    <div class="task-details-items">
+      @if (task) {
+        <div class="task-details">
+          <div class="task">
+            <div class="info">
+              @switch (task.priority.name) {
+                @case ('დაბალი') {
+                  <div class="priority low">
+                    <img [src]="task.priority.icon" alt="">
+                    {{task.priority.name}}
+                  </div>
+                }
+                @case ('საშუალო') {
+                  <div class="priority medium">
+                    <img [src]="task.priority.icon" alt="">
+                    {{task.priority.name}}
+                  </div>
+                }
+                @case ('მაღალი') {
+                  <div class="priority high">
+                    <img [src]="task.priority.icon" alt="">
+                    {{task.priority.name}}
+                  </div>
+                }
+              }
+              <div class="department" [style.background-color]="colors[task.department.id - 1]">{{task.department.name}}</div>
+            </div>
+            <h3>{{task.name}}</h3>
+            <p>
+              {{task.description}}
+            </p>
+          </div>
+          <div class="details">
+            <h4>
+              დავალების დეტალები
+            </h4>
+            <div class="info">
+              <div class="info-item">
+                <div class="item">
+                  <img ngSrc="/assets/images/icons/status.svg" alt="" height="24" width="24">
+                  სტატუსი
+                </div>
+                <div class="select">
+                  <p-select
+                    panelStyleClass="select-panel"
+                    appendTo="body"
+                    [(ngModel)]="taskStatus"
+                    [options]="statuses"
+                    (ngModelChange)="selectValueChanged($event)"
+                    optionValue="id"
+                    optionLabel="name"
+                  />
+                </div>
+              </div>
+              <div class="info-item">
+                <div class="item">
+                  <img ngSrc="/assets/images/icons/user.svg" alt="" height="24" width="24">
+                  თანამშრომელი
+                </div>
+                <div class="employee-avatar">
+                  <img [src]="task.employee.avatar" alt="">
+                  <div class="employee-info">
+                    <span>დიზაინის დეპარტამენტი</span>
+                    {{task.employee.name + ' ' + task.employee.surname}}
+                  </div>
+                </div>
+              </div>
+              <div class="info-item">
+                <div class="item">
+                  <img ngSrc="/assets/images/icons/calendar.svg" alt="" height="24" width="24">
+                  დავალების ვადა
+                </div>
+                <div class="item">
+                <span>
+                  {{ task.due_date | date:'EEE - MM/d/yyyy'}}
+                </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+      <div class="comments">
+
+      </div>
+    </div>
+  </div>
+</section>
