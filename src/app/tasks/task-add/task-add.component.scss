@@ -254,6 +254,9 @@
                 padding-top: 14px;
                 resize: none;
                 height: 133px;
+                &.border-def {
+                  border: 1px solid $gray3 !important;
+                }
               }
 
               input {

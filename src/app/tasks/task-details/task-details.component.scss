@@ -2,10 +2,129 @@
 
 .task-details-section {
   width: 100%;
-  padding-top: 70px;
+  padding-top: 60px;
+  padding-bottom: 50px;
   .task-details-items {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.12fr 1fr;
+    .comments-wrapper {
+      width: 100%;
+      margin-top: 55px;
+      background: $gray8;
+      height: max-content;
+      border: 1px solid $purple2;
+      padding: 40px 45px;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      row-gap: 65px;
+      .comment {
+        display: flex;
+        flex-direction: column;
+        .comment-info {
+          display: flex;
+          column-gap: 12px;
+          .avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            object-fit: cover;
+          }
+          .comment-details {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            row-gap: 5px;
+            padding-top: 5px;
+            .reply {
+              margin-top: 5px;
+            }
+            .reply-button {
+              display: flex;
+              column-gap: 6px;
+              color: $purple;
+              font-size: 12px;
+              margin-top: 10px;
+              align-items: center;
+              cursor: pointer;
+              width: max-content;
+            }
+            h4 {
+              color: $black;
+              font-size: 18px;
+            }
+            p {
+              font-size: 16px;
+              color: $gray2;
+            }
+          }
+        }
+      }
+      .comments {
+        display: flex;
+        flex-direction: column;
+        row-gap: 40px;
+        .comments-count {
+          display: flex;
+          font-size: 20px;
+          color: black;
+          column-gap: 10px;
+          align-items: center;
+          .count {
+            padding: 3.5px 11px;
+            background: $purple;
+            border-radius: 30px;
+            color: white;
+            font-size: 14px;
+          }
+        }
+      }
+      .textarea-wrapper {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        border: 1px solid $gray3;
+        border-radius: 10px;
+        &:has(textarea.ng-invalid.ng-touched) {
+          border: 1px solid $invalid !important;
+        }
+        &:has(textarea.ng-invalid.ng-dirty) {
+          border: 1px solid $invalid !important;
+        }
+        &.answer {
+          margin-top: 15px;
+        }
+        .button-wrapper {
+          background: white;
+          border-top: 0;
+          border-bottom-left-radius: 10px;
+          border-bottom-right-radius: 10px;
+          padding-bottom: 10px;
+          padding-top: 10px;
+          padding-right: 10px;
+          display: flex;
+          justify-content: flex-end;
+          button {
+            padding: 8px 15px;
+          }
+        }
+        textarea {
+          width: 100%;
+          border: 0 !important;
+          height: 100px;
+          resize: none;
+          border-radius: 10px;
+          border-bottom-left-radius: 0;
+          border-bottom-right-radius: 0;
+          background: white;
+          color: $gray2;
+          padding: 28px 20px;
+          &::placeholder {
+            color: #898989;
+          }
+        }
+      }
+    }
     .task-details {
       display: flex;
       flex-direction: column;
@@ -111,9 +230,6 @@
           column-gap: 10px;
         }
       }
-    }
-    .comments {
-      width: 100%;
     }
   }
 }

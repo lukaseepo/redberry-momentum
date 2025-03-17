@@ -19,6 +19,8 @@ import {ToastService} from '../../core/services/toast.service';
 import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {EmployeeAddComponent} from '../../shared/components/employee-add/employee-add.component';
+import {maxNonSpaceCharsValidator} from '../../core/validators/char-validator';
+import {of, switchMap, tap} from 'rxjs';
 
 @Component({
   selector: 'app-task-add',
@@ -66,42 +68,20 @@ export class TaskAddComponent implements OnInit, OnDestroy {
 
   public ngOnInit() {
     this.defaultDate.setDate(this.defaultDate.getDate() + 1);
+    this.getStatuses();
+    this.getDepartments();
+    this.getPriorities();
+    this.getEmployees();
+
     this.taskAddForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255), Validators.pattern(/^(?=.*\S.*\S.*\S).*$/)]],
-      description: ['', [Validators.maxLength(255), Validators.pattern(/^(?=(\S+\s+){3}\S+).*$/)]],
-      due_date: [this.defaultDate, [Validators.required]],
+      name: ['', [Validators.required, Validators.minLength(3), maxNonSpaceCharsValidator(255), Validators.pattern(/^(?=.*\S.*\S.*\S).*$/)]],
+      description: ['', [maxNonSpaceCharsValidator(255), Validators.pattern(/^(?=(\S+\s+){3}\S+).*$/)]],
+      due_date: ['', [Validators.required]],
       status_id: ['', Validators.required],
       priority_id: ['', Validators.required],
       employee_id: [{value: '', disabled: true}, Validators.required],
       department_id: ['', Validators.required]
     })
-
-    this.getStatuses();
-    this.getDepartments();
-    this.getPriorities();
-    const savedData = this.loadFormFromLocalStorage();
-    if (savedData) {
-      if (savedData.due_date) {
-        savedData.due_date = new Date(savedData.due_date);
-      }
-
-      this.taskAddForm.patchValue(savedData);
-
-      if (savedData.department_id) {
-        this.taskAddForm.get('employee_id')?.enable();
-      }
-
-      this.taskService.getEmployees().subscribe((res) => {
-        this.employees = res;
-        this.allEmployees = res;
-
-        this.employees = this.allEmployees.filter(employee => employee.department.id === this.taskAddForm.get('department_id')?.value);
-      })
-
-    } else {
-      this.getEmployees();
-    }
-
     this.taskAddForm.get('department_id')?.valueChanges.subscribe(() => {
       this.taskAddForm.get('employee_id')?.enable();
       this.taskAddForm.get('employee_id')?.setValue('');
@@ -119,11 +99,48 @@ export class TaskAddComponent implements OnInit, OnDestroy {
     })
   }
 
-  public getEmployees() {
-    this.taskService.getEmployees().subscribe((res) => {
-      this.employees = res;
-      this.allEmployees = res;
-    })
+  public  getEmployees() {
+    const savedData = this.loadFormFromLocalStorage();
+    this.taskService.getEmployees().pipe(
+      tap(res => {
+        this.employees = res;
+        this.allEmployees = res;
+        this.employees = this.allEmployees.filter(employee =>
+          employee.department.id === this.taskAddForm.get('department_id')?.value
+        );
+      }),
+      switchMap(() => {
+        if (savedData) {
+          if (savedData.due_date) {
+            savedData.due_date = new Date(savedData.due_date);
+          } else {
+            this.taskAddForm.patchValue({
+              due_date: this.defaultDate,
+            })
+            delete savedData.due_date;
+          }
+
+          if (savedData.department_id) {
+            this.taskAddForm.get('employee_id')?.enable();
+          } else {
+            delete savedData.department_id;
+          }
+
+          this.taskAddForm.patchValue(savedData);
+          this.employees = this.allEmployees.filter(employee =>
+            employee.department.id === this.taskAddForm.get('department_id')?.value
+          );
+          const fieldsToCheck = ['name', 'description', 'employee_id', 'department_id', 'due_date'];
+
+          fieldsToCheck.forEach(field => {
+            if (this.taskAddForm.get(field)?.value) {
+              this.taskAddForm.get(field)?.markAsTouched();
+            }
+          });
+        }
+        return of(null);
+      })
+    ).subscribe();
   }
 
   public getPriorities() {

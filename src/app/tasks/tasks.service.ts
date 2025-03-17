@@ -7,6 +7,7 @@ import {Priority} from '../shared/models/priority';
 import {Employee} from '../shared/models/employee';
 import {Status} from '../shared/models/status';
 import {Task} from '../shared/models/task';
+import {Comment} from '../shared/models/comment';
 
 @Injectable({
   providedIn: 'root'
@@ -78,6 +79,27 @@ export class TasksService {
 
     return this.http.put<Task>(environment.apiUrl + 'tasks/' + id, task, options);
   }
+
+  public postComment(id:number, comment: {text: string, parent_id?: number}): Observable<Comment[]> {
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + this.apiToken
+    });
+
+    const options = { headers: headers };
+
+    return this.http.post<Comment[]>(environment.apiUrl + 'tasks/' + id + '/comments', comment, options);
+  }
+
+  public getAllComments(id:number): Observable<Comment[]> {
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + this.apiToken
+    });
+
+    const options = { headers: headers };
+
+    return this.http.get<Comment[]>(environment.apiUrl + 'tasks/' + id + '/comments', options);
+  }
+
 
   public getTasks(): Observable<Task[]> {
     const headers = new HttpHeaders({

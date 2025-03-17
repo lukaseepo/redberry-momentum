@@ -1,5 +1,5 @@
 <div class="tasks-items">
-  @if (statuses) {
+  @if (allTasks && allTasks.length && statuses && statuses.length) {
     <div class="tasks">
       <div class="task-step start">{{ statuses[0].name }}</div>
       @for (task of startTasks; track task.id) {

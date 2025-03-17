@@ -26,11 +26,11 @@
                  მინიმუმ 2 სიმბოლო
                </div>
                <div class="instruction"
-                    [class.instruction-valid]="(employeeAddForm.get('name')?.value['length'] <= 255 && employeeAddForm.get('name')?.value['length'] >= 2) && (employeeAddForm.get('name')?.touched || employeeAddForm.get('name')?.dirty) && !employeeAddForm.get('name')?.errors?.['pattern']"
-                    [class.instruction-invalid]="(employeeAddForm.get('name')?.value['length'] > 255 || employeeAddForm.get('name')?.value['length'] < 2)  && (employeeAddForm.get('name')?.touched || employeeAddForm.get('name')?.dirty) || employeeAddForm.get('name')?.errors?.['pattern']">
-                 @if ((employeeAddForm.get('name')?.value['length'] <= 255 && employeeAddForm.get('name')?.value['length'] >= 2) && (employeeAddForm.get('name')?.touched || employeeAddForm.get('name')?.dirty) && !employeeAddForm.get('name')?.errors?.['pattern']) {
+                    [class.instruction-valid]="employeeAddForm.get('name')?.value['length'] <= 255 && employeeAddForm.get('name')?.value['length'] > 0 && (employeeAddForm.get('name')?.touched || employeeAddForm.get('name')?.dirty) && !employeeAddForm.get('name')?.errors?.['pattern']"
+                    [class.instruction-invalid]="(employeeAddForm.get('name')?.value['length'] > 255 || employeeAddForm.get('name')?.value['length'] === 0)  && (employeeAddForm.get('name')?.touched || employeeAddForm.get('name')?.dirty) || employeeAddForm.get('name')?.errors?.['pattern']">
+                 @if (employeeAddForm.get('name')?.value['length'] <= 255 && employeeAddForm.get('name')?.value['length'] > 0 && (employeeAddForm.get('name')?.touched || employeeAddForm.get('name')?.dirty) && !employeeAddForm.get('name')?.errors?.['pattern']) {
                    <img ngSrc="/assets/images/icons/check-valid.svg" alt="" height="16" width="16">
-                 } @else if ((employeeAddForm.get('name')?.value['length'] > 255 || employeeAddForm.get('name')?.value['length'] < 2)  && (employeeAddForm.get('name')?.touched || employeeAddForm.get('name')?.dirty) || employeeAddForm.get('name')?.errors?.['pattern']) {
+                 } @else if ((employeeAddForm.get('name')?.value['length'] > 255 || employeeAddForm.get('name')?.value['length'] === 0)  && (employeeAddForm.get('name')?.touched || employeeAddForm.get('name')?.dirty) || employeeAddForm.get('name')?.errors?.['pattern']) {
                    <img ngSrc="/assets/images/icons/check-invalid.svg" alt="" height="16" width="16">
                  } @else {
                    <img ngSrc="/assets/images/icons/check.svg" alt="" height="16" width="16">

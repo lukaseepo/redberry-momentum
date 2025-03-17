@@ -6,6 +6,7 @@ import {TasksService} from '../../../tasks/tasks.service';
 import {Department} from '../../models/department';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogClose} from '@angular/material/dialog';
 import {ToastService} from '../../../core/services/toast.service';
+import {maxNonSpaceCharsValidator} from '../../../core/validators/char-validator';
 
 @Component({
   selector: 'app-employee-add',
@@ -46,7 +47,7 @@ export class EmployeeAddComponent implements OnInit {
     this.getDepartments();
     this.employeeAddForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(255), Validators.pattern(/^[ა-ჰa-zA-Z]+$/)]],
-      surname: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(255), Validators.pattern(/^[ა-ჰa-zA-Z]+$/)]],
+      surname: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(255),  Validators.pattern(/^[ა-ჰa-zA-Z]+$/)]],
       avatar: ['', Validators.required],
       department_id: ['', Validators.required],
     })

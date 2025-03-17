@@ -85,13 +85,19 @@ input, textarea {
 }
 
 input, textarea {
-  &.ng-invalid.ng-touched {
+  &.ng-invalid.ng-dirty {
     border: 1px solid $invalid !important;
   }
 }
 
 input, textarea {
   &.ng-valid.ng-touched {
+    border: 1px solid $valid !important;
+  }
+}
+
+input, textarea {
+  &.ng-valid.ng-dirty {
     border: 1px solid $valid !important;
   }
 }

@@ -21,8 +21,8 @@
                   </div>
                   <div
                     class="instruction"
-                    [class.instruction-valid]="(taskAddForm.get('name')?.value['length'] <= 255 && taskAddForm.get('name')?.value['length'] >= 3) && (taskAddForm.get('name')?.touched || taskAddForm.get('name')?.dirty) && !taskAddForm.get('name')?.errors?.['pattern']"
-                    [class.instruction-invalid]="(taskAddForm.get('name')?.value['length'] > 255 || taskAddForm.get('name')?.value['length'] < 3)  && (taskAddForm.get('name')?.touched || taskAddForm.get('name')?.dirty) || taskAddForm.get('name')?.errors?.['pattern']">
+                    [class.instruction-valid]="!taskAddForm.get('name')?.hasError('maxNonSpaceChars') && taskAddForm.get('name')?.value?.['length'] && (taskAddForm.get('name')?.touched || taskAddForm.get('name')?.dirty)"
+                    [class.instruction-invalid]="(taskAddForm.get('name')?.hasError('maxNonSpaceChars') || !taskAddForm.get('name')?.value?.['length'])  && (taskAddForm.get('name')?.touched || taskAddForm.get('name')?.dirty) ">
                     მაქსიმუმ 255 სიმბოლო
                   </div>
                 </div>
@@ -41,19 +41,19 @@
             <div class="input-wrapper">
               <div class="input">
                 <label>აღწერა</label>
-                <textarea formControlName="description"></textarea>
+                <textarea [class.border-def]="taskAddForm.get('description')?.value?.['length'] === 0" formControlName="description"></textarea>
                 <div class="instructions">
                   <div
                     class="instruction"
-                    [class.instruction-valid]="(taskAddForm.get('description')?.touched || taskAddForm.get('description')?.dirty) && !taskAddForm.get('description')?.errors?.['pattern']"
-                    [class.instruction-invalid]="(taskAddForm.get('description')?.touched || taskAddForm.get('description')?.dirty) && taskAddForm.get('description')?.errors?.['pattern']"
+                    [class.instruction-valid]="taskAddForm.get('description')?.value?.['length'] > 0  && (taskAddForm.get('description')?.touched || taskAddForm.get('description')?.dirty) && !taskAddForm.get('description')?.errors?.['pattern']"
+                    [class.instruction-invalid]="taskAddForm.get('description')?.value?.['length'] > 0 || (taskAddForm.get('description')?.touched || taskAddForm.get('description')?.dirty) && taskAddForm.get('description')?.errors?.['pattern']"
                   >
                     მინიმუმ 4 სიტყვა
                   </div>
                   <div
                     class="instruction"
-                    [class.instruction-valid]="taskAddForm.get('description')?.value['length'] <= 255 && (taskAddForm.get('description')?.touched || taskAddForm.get('description')?.dirty) && !taskAddForm.get('description')?.errors?.['pattern']"
-                    [class.instruction-invalid]="taskAddForm.get('description')?.value['length'] > 255  && (taskAddForm.get('description')?.touched || taskAddForm.get('description')?.dirty) || taskAddForm.get('description')?.errors?.['pattern']">
+                    [class.instruction-valid]="taskAddForm.get('description')?.value?.['length'] > 0  && !taskAddForm.get('description')?.hasError('maxNonSpaceChars') && taskAddForm.get('description')?.value?.['length'] && (taskAddForm.get('description')?.touched || taskAddForm.get('description')?.dirty)"
+                    [class.instruction-invalid]="taskAddForm.get('description')?.value?.['length'] > 0  && (taskAddForm.get('description')?.hasError('maxNonSpaceChars') || !taskAddForm.get('description')?.value?.['length'])  && (taskAddForm.get('description')?.touched || taskAddForm.get('description')?.dirty)">
                     მაქსიმუმ 255 სიმბოლო
                   </div>
                 </div>
