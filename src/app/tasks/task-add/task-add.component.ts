@@ -1,4 +1,4 @@
-import {Component, effect, EffectRef, OnDestroy, OnInit} from '@angular/core';
+import {Component, effect, EffectRef, LOCALE_ID, OnDestroy, OnInit} from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -6,7 +6,7 @@ import {
   ReactiveFormsModule,
   Validators
 } from '@angular/forms';
-import {NgOptimizedImage} from '@angular/common';
+import {NgOptimizedImage, registerLocaleData} from '@angular/common';
 import {Select} from 'primeng/select';
 import {Status} from '../../shared/models/status';
 import {Department} from '../../shared/models/department';
@@ -21,6 +21,8 @@ import {MatDialog} from '@angular/material/dialog';
 import {EmployeeAddComponent} from '../../shared/components/employee-add/employee-add.component';
 import {maxNonSpaceCharsValidator} from '../../core/validators/char-validator';
 import {of, switchMap, tap} from 'rxjs';
+import localeKa from '@angular/common/locales/ka';
+
 
 @Component({
   selector: 'app-task-add',
@@ -32,8 +34,9 @@ import {of, switchMap, tap} from 'rxjs';
     DatePickerModule,
     NgOptimizedImage,
   ],
+  standalone: true,
   templateUrl: './task-add.component.html',
-  styleUrl: './task-add.component.scss'
+  styleUrl: './task-add.component.scss',
 })
 export class TaskAddComponent implements OnInit, OnDestroy {
   public taskAddForm: FormGroup = new FormGroup({});
@@ -114,7 +117,7 @@ export class TaskAddComponent implements OnInit, OnDestroy {
       switchMap(() => {
         if (savedData) {
           if (savedData.due_date) {
-            // savedData.due_date = new Date(savedData.due_date);
+            savedData.due_date = new Date(savedData.due_date);
           } else {
             delete savedData.due_date;
           }

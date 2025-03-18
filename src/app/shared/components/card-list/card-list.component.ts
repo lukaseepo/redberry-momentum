@@ -21,8 +21,11 @@ export class CardListComponent implements OnInit {
   public startTasks!: Task[];
   public progressTasks!: Task[];
   public testingTasks!: Task[];
+  public filteredTasks!: Task[];
   public finishedTasks!: Task[];
   public statuses!: Status[];
+  private tasksLoaded = false;
+  private pendingFilters: { [type: string]: { [key: string]: boolean } } | null = null;
   constructor(private taskService: TasksService) { }
 
   ngOnInit(): void {
@@ -33,10 +36,14 @@ export class CardListComponent implements OnInit {
   public getAllTasks(): void {
     this.taskService.getTasks().subscribe((res) => {
       this.allTasks = res;
-      this.startTasks = this.allTasks.filter(task => task.status.id === 1);
-      this.progressTasks = this.allTasks.filter(task => task.status.id === 2);
-      this.testingTasks = this.allTasks.filter(task => task.status.id === 3);
-      this.finishedTasks = this.allTasks.filter(task => task.status.id === 4);
+      this.filteredTasks = [...this.allTasks];
+      this.tasksLoaded = true;
+      if (this.pendingFilters) {
+        this.onFilterChange(this.pendingFilters);
+        this.pendingFilters = null;
+      } else {
+        this.updateTaskLists();
+      }
     })
   }
 
@@ -46,10 +53,55 @@ export class CardListComponent implements OnInit {
     })
   }
 
-  public onFilterChange(event: {[key: string]: boolean}[]) {
-    const employee_filter = event[0];
-    const priority_filter = event[1];
-    const department_filters = event[2];
-    console.log(employee_filter);
+  private updateTaskLists(): void {
+    this.startTasks = this.filteredTasks.filter(task => task.status.id === 1);
+    this.progressTasks = this.filteredTasks.filter(task => task.status.id === 2);
+    this.testingTasks = this.filteredTasks.filter(task => task.status.id === 3);
+    this.finishedTasks = this.filteredTasks.filter(task => task.status.id === 4);
+  }
+
+  public onFilterChange(filterState: { [type: string]: { [key: string]: boolean } }): void {
+    if (!this.tasksLoaded) {
+      this.pendingFilters = filterState;
+      return;
+    }
+    let filteredTasks = [...this.allTasks];
+
+    const departmentFilters = filterState['department'];
+    const activeDepartmentFilters = Object.entries(departmentFilters)
+      .filter(([_, isActive]) => isActive)
+      .map(([name, _]) => name);
+
+    if (activeDepartmentFilters.length > 0) {
+      filteredTasks = filteredTasks.filter(task =>
+        task.department && activeDepartmentFilters.includes(task.department.name)
+      );
+    }
+
+    const priorityFilters = filterState['priority'];
+    const activePriorityFilters = Object.entries(priorityFilters)
+      .filter(([_, isActive]) => isActive)
+      .map(([name, _]) => name);
+    if (activePriorityFilters.length > 0) {
+      filteredTasks = filteredTasks.filter(task =>
+        task.priority && activePriorityFilters.includes(task.priority.name)
+      );
+    }
+
+    const employeeFilters = filterState['employee'];
+    const activeEmployeeFilters = Object.entries(employeeFilters)
+      .filter(([_, isActive]) => isActive)
+      .map(([id, _]) => id);
+
+
+    if (activeEmployeeFilters.length > 0) {
+      filteredTasks = filteredTasks.filter(task =>
+        task.employee && activeEmployeeFilters.includes(task.employee.id.toString())
+      );
+    }
+
+    this.filteredTasks = filteredTasks;
+
+    this.updateTaskLists();
   }
 }

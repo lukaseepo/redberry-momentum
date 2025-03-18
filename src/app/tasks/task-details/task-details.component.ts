@@ -20,7 +20,7 @@ registerLocaleData(localeKa);
     FormsModule,
     ReactiveFormsModule,
     Select,
-    DatePipe
+    DatePipe,
   ],
   templateUrl: './task-details.component.html',
   styleUrl: './task-details.component.scss',
@@ -32,8 +32,10 @@ export class TaskDetailsComponent implements OnInit {
   public comment: string = '';
   public statuses!: Status[];
   public colors = Colors;
+  public all_comments_count = 0;
   public showReplyAreas: boolean[] = [];
   public replyTexts: string[] = [];
+  public addedNewComment = false;
   public taskStatus = 0;
   public comments!: Comment[];
 
@@ -72,6 +74,7 @@ export class TaskDetailsComponent implements OnInit {
       this.taskService.postComment(this.taskId, {text: this.comment}).subscribe(() => {
         this.toastService.showSuccess('კომენტარი წარმატებით დაემატა')
         this.getAllComments();
+        this.addedNewComment = true;
       })
       this.comment = '';
       return;
@@ -90,7 +93,20 @@ export class TaskDetailsComponent implements OnInit {
   public getAllComments() {
     this.taskService.getAllComments(this.taskId).subscribe((res) => {
       this.comments = res;
+      this.all_comments_count = this.countComments(this.comments);
     })
+  }
+
+  private countComments(comments: any[]): number {
+    let count = comments.length;
+
+    for (let comment of comments) {
+      if (comment.sub_comments && Array.isArray(comment.sub_comments)) {
+        count += this.countComments(comment.sub_comments);
+      }
+    }
+
+    return count;
   }
 
   public getTaskById() {

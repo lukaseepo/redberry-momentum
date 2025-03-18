@@ -33,6 +33,12 @@
         flex-direction: column;
         row-gap: 20px;
         justify-content: center;
+        .www {
+          display: flex;
+          flex-direction: column;
+          row-gap: 20px;
+          justify-content: center;
+        }
         .checkbox {
           display: flex;
           column-gap: 12px;

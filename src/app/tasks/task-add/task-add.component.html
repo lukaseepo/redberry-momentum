@@ -58,46 +58,50 @@
                   </div>
                 </div>
               </div>
-              <div class="select">
-                <label>პასუხისმგებელი თანამშრომელი*</label>
-                <p-select
-                  [options]="employees"
-                  panelStyleClass="select-panel"
-                  formControlName="employee_id"
-                  appendTo="body"
-                  [disabled]="true"
-                  #employeePanel
-                  optionValue="id"
-                >
-                  <ng-template pTemplate="empty">
-                    <div class="option">
-                      თანამშრომლები ამ დეპარტამენტში ვერ მოიძებნა
-                    </div>
-                  </ng-template>
-                  <ng-template pTemplate="header">
-                    <div class="header-button" (click)="openAddEmployeeDialog(); employeePanel.hide()">
-                      <img ngSrc="/assets/images/icons/plus-circle.svg" alt="" height="20" width="20">
-                      დაამატე თანამშრომელი
-                    </div>
-                  </ng-template>
-                  <ng-template let-employee pTemplate="selectedItem">
-                    <div class="option">
-                      <div class="avatar">
-                        <img [src]="employee.avatar" alt="">
+              @if(taskAddForm.get('department_id')?.value) {
+                <div class="select">
+                  <label>პასუხისმგებელი თანამშრომელი*</label>
+                  <p-select
+                    [options]="employees"
+                    panelStyleClass="select-panel"
+                    formControlName="employee_id"
+                    appendTo="body"
+                    [disabled]="true"
+                    #employeePanel
+                    optionValue="id"
+                  >
+                    <ng-template pTemplate="empty">
+                      <div class="option">
+                        თანამშრომლები ამ დეპარტამენტში ვერ მოიძებნა
                       </div>
-                      {{ employee.name + ' ' + employee.surname }}
-                    </div>
-                  </ng-template>
-                  <ng-template let-employee pTemplate="item">
-                    <div class="option" >
-                      <div class="avatar">
-                        <img [src]="employee.avatar" alt="">
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                      <div class="header-button" (click)="openAddEmployeeDialog(); employeePanel.hide()">
+                        <img ngSrc="/assets/images/icons/plus-circle.svg" alt="" height="20" width="20">
+                        დაამატე თანამშრომელი
                       </div>
-                      {{ employee.name + ' ' + employee.surname }}
-                    </div>
-                  </ng-template>
-                </p-select>
-              </div>
+                    </ng-template>
+                    <ng-template let-employee pTemplate="selectedItem">
+                      <div class="option">
+                        <div class="avatar">
+                          <img [src]="employee.avatar" alt="">
+                        </div>
+                        {{ employee.name + ' ' + employee.surname }}
+                      </div>
+                    </ng-template>
+                    <ng-template let-employee pTemplate="item">
+                      <div class="option" >
+                        <div class="avatar">
+                          <img [src]="employee.avatar" alt="">
+                        </div>
+                        {{ employee.name + ' ' + employee.surname }}
+                      </div>
+                    </ng-template>
+                  </p-select>
+                </div>
+              } @else {
+                <div class="input"></div>
+              }
             </div>
             <div class="input-wrapper">
               <div class="double-select">

@@ -28,20 +28,34 @@ body {
 .btn-primary {
   padding: 10px 20px;
   background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: 1px solid $purple;
   font-size: 16px;
   color: $black;
   cursor: pointer;
   border-radius: 5px;
+  &:hover {
+    border: 1px solid $purple-hover;
+    transition: 0.3s;
+  }
 }
 
 .btn-tertiary {
   padding: 8px 48px;
   background: $purple;
   color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 20px;
   font-size: 16px;
   cursor: pointer;
+  &:hover {
+    background: #B588F4;
+    transition: 0.3s;
+  }
 }
 
 .btn-secondary {
@@ -50,9 +64,15 @@ body {
   color: white;
   font-size: 16px;
   display: flex;
+  align-items: center;
+  justify-content: center;
   column-gap: 5px;
   border-radius: 5px;
   cursor: pointer;
+  &:hover {
+    background: #B588F4;
+    transition: 0.3s;
+  }
 }
 
 .task-step {

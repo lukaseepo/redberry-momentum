@@ -6,7 +6,6 @@ import {TasksService} from '../../../tasks/tasks.service';
 import {Department} from '../../models/department';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogClose} from '@angular/material/dialog';
 import {ToastService} from '../../../core/services/toast.service';
-import {maxNonSpaceCharsValidator} from '../../../core/validators/char-validator';
 
 @Component({
   selector: 'app-employee-add',

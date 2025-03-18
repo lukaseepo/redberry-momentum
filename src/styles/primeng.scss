@@ -87,6 +87,18 @@
   }
 }
 
+.p-datepicker-dropdown {
+  background-image: url('/assets/images/icons/calendar-input-icon.svg') !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: 17px !important;
+  margin-left: 3px;
+  .p-iconwrapper {
+    svg {
+      display: none !important;
+    }
+  }
+}
 
 
 

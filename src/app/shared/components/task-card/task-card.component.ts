@@ -1,7 +1,10 @@
-import {Component, Input} from '@angular/core';
-import {DatePipe, NgClass, NgOptimizedImage} from '@angular/common';
+import {Component, Input, LOCALE_ID} from '@angular/core';
+import {DatePipe, NgOptimizedImage, registerLocaleData} from '@angular/common';
 import {RouterLink} from '@angular/router';
 import {Colors} from '../../../core/constants/constants';
+import localeKa from '@angular/common/locales/ka';
+
+registerLocaleData(localeKa);
 
 @Component({
   selector: 'app-task-card',
@@ -11,7 +14,8 @@ import {Colors} from '../../../core/constants/constants';
     RouterLink
   ],
   templateUrl: './task-card.component.html',
-  styleUrl: './task-card.component.scss'
+  styleUrl: './task-card.component.scss',
+  providers: [{ provide: LOCALE_ID, useValue: 'ka' }]
 })
 export class TaskCardComponent {
   @Input() public taskCardClass = '';

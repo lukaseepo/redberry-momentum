@@ -82,8 +82,8 @@
           </div>
         </div>
         <div class="comments-wrapper">
-          <div class="textarea-wrapper">
-            <textarea required pattern=".*\S.*" [(ngModel)]="comment" placeholder="დაწერე კომენტარი"></textarea>
+          <div class="textarea-wrapper" [class.not-invalid]="addedNewComment">
+            <textarea required pattern=".*\S.*" (ngModelChange)="addedNewComment = false" [(ngModel)]="comment" placeholder="დაწერე კომენტარი"></textarea>
             <div class="button-wrapper">
               <button class="btn-tertiary" (click)="postComment()">დააკომენტარე</button>
             </div>
@@ -103,7 +103,7 @@
               <div class="comments-count">
                 კომენტარები
                 <div class="count">
-                  {{comments.length}}
+                  {{all_comments_count}}
                 </div>
               </div>
               @for (comment of comments; track comment.id; let index = $index) {

@@ -4,13 +4,20 @@
       <div class="filter-options">
         @if (showDepartmentFilter) {
           <div class="checkbox-wrapper">
-            @for (department of departments; track department.id) {
-              <div class="checkbox">
-                <p-checkbox [(ngModel)]="department_filters[department.name]"
-                            inputId="dept{{department.id}}" [binary]="true"/>
-                <label for="dept{{department.id}}">{{ department.name }}</label>
-              </div>
-            }
+            <div class="www">
+              @for (department of departments; track department.id) {
+                <div class="checkbox">
+                  <p-checkbox [(ngModel)]="department_filters[department.name]"
+                              inputId="dept{{department.id}}" [binary]="true"/>
+                  <label for="dept{{department.id}}">{{ department.name }}</label>
+                </div>
+              }
+            </div>
+            <div class="button-wrapper">
+              <button (click)="filterDepartments()" class="btn-tertiary">
+                არჩევა
+              </button>
+            </div>
           </div>
         } @else if (showPriorityFilter) {
           <div class="checkbox-wrapper">
@@ -21,6 +28,11 @@
                 <label for="prior{{priority.id}}">{{ priority.name }}</label>
               </div>
             }
+            <div class="button-wrapper">
+              <button (click)="filterPriorities()" class="btn-tertiary">
+                არჩევა
+              </button>
+            </div>
           </div>
         } @else if (showEmployeeFilter) {
           <div class="checkbox-wrapper">
@@ -35,12 +47,12 @@
               </div>
             }
           </div>
+          <div class="button-wrapper">
+            <button (click)="filterEmployees()" class="btn-tertiary">
+              არჩევა
+            </button>
+          </div>
         }
-        <div class="button-wrapper">
-          <button class="btn-tertiary">
-            არჩევა
-          </button>
-        </div>
       </div>
     }
     <ul class="filter-items">
