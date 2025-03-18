@@ -4,11 +4,13 @@ import {HttpClient} from '@angular/common/http';
 import {TasksService} from '../../../tasks/tasks.service';
 import {Task} from '../../models/task';
 import {Status} from '../../models/status';
+import {FilterComponent} from '../filter/filter.component';
 
 @Component({
   selector: 'app-card-list',
   imports: [
-    TaskCardComponent
+    TaskCardComponent,
+    FilterComponent
   ],
   standalone: true,
   templateUrl: './card-list.component.html',
@@ -42,5 +44,12 @@ export class CardListComponent implements OnInit {
     this.taskService.getStatuses().subscribe((res) => {
       this.statuses = res;
     })
+  }
+
+  public onFilterChange(event: {[key: string]: boolean}[]) {
+    const employee_filter = event[0];
+    const priority_filter = event[1];
+    const department_filters = event[2];
+    console.log(employee_filter);
   }
 }

@@ -121,6 +121,14 @@
                         <img ngSrc="/assets/images/icons/reply.svg" alt="" height="16" width="16">
                         უპასუხე
                       </div>
+                      @if(showReplyAreas[index]) {
+                        <div class="textarea-wrapper answer">
+                          <textarea required pattern=".*\S.*" [(ngModel)]="replyTexts[index]" placeholder="დაწერე კომენტარი"></textarea>
+                          <div class="button-wrapper">
+                            <button class="btn-tertiary" (click)="postComment(comment.id, index)">დააკომენტარე</button>
+                          </div>
+                        </div>
+                      }
                       @if (comment.sub_comments.length) {
                         @for (sub_comment of comment.sub_comments; track sub_comment.id) {
                           <div class="reply">
@@ -139,14 +147,6 @@
                             </div>
                           </div>
                         }
-                      }
-                      @if(showReplyAreas[index]) {
-                        <div class="textarea-wrapper answer">
-                          <textarea required pattern=".*\S.*" [(ngModel)]="replyTexts[index]" placeholder="დაწერე კომენტარი"></textarea>
-                          <div class="button-wrapper">
-                            <button class="btn-tertiary" (click)="postComment(comment.id, index)">დააკომენტარე</button>
-                          </div>
-                        </div>
                       }
                     </div>
                   </div>

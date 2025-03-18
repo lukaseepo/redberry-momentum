@@ -1,99 +1,130 @@
 @import 'variables';
 
-:host .filter {
-  width: 688px;
-  height: 44px;
-  padding: 0 18px;
+:host .filter-wrapper {
   display: flex;
-  align-items: center;
-  border-radius: 10px;
-  border: 1px solid $gray;
-  position: relative;
-  .filter-options {
-    position: absolute;
+  flex-direction: column;
+  row-gap: 15px;
+  .filter {
     width: 688px;
-    background: white;
-    border: 1px solid $purple;
-    left: 0;
-    top: 55px;
+    height: 44px;
+    padding: 0 18px;
+    display: flex;
+    align-items: center;
     border-radius: 10px;
-    padding: 40px 30px 20px 30px;
-    .button-wrapper {
-      width: 100%;
-      display: flex;
-      justify-content: end;
-      margin-top: 20px;
-    }
-    .checkbox-wrapper {
-      display: flex;
-      flex-direction: column;
-      row-gap: 20px;
-      justify-content: center;
-      .checkbox {
+    border: 1px solid $gray;
+    position: relative;
+    .filter-options {
+      position: absolute;
+      width: 688px;
+      background: white;
+      border: 1px solid $purple;
+      left: 0;
+      top: 55px;
+      border-radius: 10px;
+      padding: 40px 30px 20px 30px;
+      .button-wrapper {
+        width: 100%;
         display: flex;
-        column-gap: 12px;
-        align-items: center;
-        .avatar-wrapper {
+        justify-content: end;
+        margin-top: 20px;
+      }
+      .checkbox-wrapper {
+        display: flex;
+        flex-direction: column;
+        row-gap: 20px;
+        justify-content: center;
+        .checkbox {
           display: flex;
-          column-gap: 8px;
+          column-gap: 12px;
           align-items: center;
-          img {
-            border-radius: 50%;
-            object-fit: cover;
+          .avatar-wrapper {
+            display: flex;
+            column-gap: 8px;
+            align-items: center;
+            img {
+              border-radius: 50%;
+              object-fit: cover;
+            }
           }
-        }
-        &.purple {
+          &.purple {
+            ::ng-deep {
+              .p-checkbox-box {
+                border: 2px solid $purple;
+              }
+              .p-checkbox-checked .p-checkbox-icon {
+                color: $purple;
+              }
+            }
+          }
           ::ng-deep {
             .p-checkbox-box {
-              border: 2px solid $purple;
+              background: white;
+              border: 2px solid $black;
+              border-radius: 6px;
             }
             .p-checkbox-checked .p-checkbox-icon {
-              color: $purple;
+              color: $black;
+              width: 12px;
+              height: 12px;
             }
           }
-        }
-        ::ng-deep {
-          .p-checkbox-box {
-            background: white;
-            border: 2px solid $black;
-            border-radius: 6px;
-          }
-          .p-checkbox-checked .p-checkbox-icon {
+          label {
             color: $black;
-            width: 12px;
-            height: 12px;
+            font-size: 16px;
+            cursor: pointer;
           }
         }
-        label {
+      }
+    }
+    .filter-items {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+      list-style: none;
+      .filter-item {
+        display: flex;
+        column-gap: 5px;
+        align-items: center;
+        cursor: pointer;
+        user-select: none;
+        &.active {
+          h4 {
+            color: $purple;
+          }
+        }
+        h4 {
+          font-weight: normal;
           color: $black;
           font-size: 16px;
-          cursor: pointer;
         }
       }
     }
   }
-  .filter-items {
+  .saved-filters {
     display: flex;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-    list-style: none;
-    .filter-item {
+    column-gap: 15px;
+    flex-wrap: wrap;
+    row-gap: 15px;
+    .clear-filters {
+      color: $gray2;
+      font-size: 14px;
+      align-items: center;
+      display: flex;
+      cursor: pointer;
+    }
+    .saved-filter {
+      background: transparent;
+      border: 1px solid $gray3;
+      font-size: 14px;
+      cursor: pointer;
+      padding: 6px 10px;
       display: flex;
       column-gap: 5px;
       align-items: center;
-      cursor: pointer;
-      user-select: none;
-      &.active {
-        h4 {
-          color: $purple;
-        }
-      }
-      h4 {
-        font-weight: normal;
-        color: $black;
-        font-size: 16px;
-      }
+      justify-content: center;
+      color: $gray2;
+      border-radius: 40px;
     }
   }
 }

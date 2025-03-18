@@ -7,7 +7,6 @@ import {CardListComponent} from '../shared/components/card-list/card-list.compon
 @Component({
   selector: 'app-tasks',
   imports: [
-    FilterComponent,
     CardListComponent
   ],
   standalone: true,

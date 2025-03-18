@@ -43,8 +43,9 @@ export class TaskAddComponent implements OnInit, OnDestroy {
   public employees!: Employee[];
   private allEmployees: Employee[] = [];
   private effectRef!: EffectRef;
-  minDate: Date = new Date();
-  defaultDate: Date = new Date();
+  public firstLoad = true;
+  private defaultDate: Date = new Date();
+  public minDate: Date = new Date();
 
   constructor(private fb: FormBuilder, private dialog: MatDialog, private taskService: TasksService, private toastService: ToastService, private router: Router) {
     this.effectRef = effect(() => {
@@ -67,6 +68,7 @@ export class TaskAddComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit() {
+    this.minDate.setHours(0, 0, 0, 0);
     this.defaultDate.setDate(this.defaultDate.getDate() + 1);
     this.getStatuses();
     this.getDepartments();
@@ -84,11 +86,14 @@ export class TaskAddComponent implements OnInit, OnDestroy {
     })
     this.taskAddForm.get('department_id')?.valueChanges.subscribe(() => {
       this.taskAddForm.get('employee_id')?.enable();
-      this.taskAddForm.get('employee_id')?.setValue('');
+      if(!this.firstLoad){
+        this.taskAddForm.get('employee_id')?.setValue('');
+      }
+      this.firstLoad = false;
       this.employees = this.allEmployees.filter(employee => employee.department.id === this.taskAddForm.get('department_id')?.value);
     })
 
-    this.taskAddForm.valueChanges.subscribe(() => {
+    this.taskAddForm.valueChanges.subscribe((v) => {
       this.saveFormToLocalStorage();
     });
   }
@@ -105,18 +110,12 @@ export class TaskAddComponent implements OnInit, OnDestroy {
       tap(res => {
         this.employees = res;
         this.allEmployees = res;
-        this.employees = this.allEmployees.filter(employee =>
-          employee.department.id === this.taskAddForm.get('department_id')?.value
-        );
       }),
       switchMap(() => {
         if (savedData) {
           if (savedData.due_date) {
-            savedData.due_date = new Date(savedData.due_date);
+            // savedData.due_date = new Date(savedData.due_date);
           } else {
-            this.taskAddForm.patchValue({
-              due_date: this.defaultDate,
-            })
             delete savedData.due_date;
           }
 
@@ -127,9 +126,7 @@ export class TaskAddComponent implements OnInit, OnDestroy {
           }
 
           this.taskAddForm.patchValue(savedData);
-          this.employees = this.allEmployees.filter(employee =>
-            employee.department.id === this.taskAddForm.get('department_id')?.value
-          );
+
           const fieldsToCheck = ['name', 'description', 'employee_id', 'department_id', 'due_date'];
 
           fieldsToCheck.forEach(field => {
@@ -137,6 +134,10 @@ export class TaskAddComponent implements OnInit, OnDestroy {
               this.taskAddForm.get(field)?.markAsTouched();
             }
           });
+        } else {
+          this.taskAddForm.patchValue({
+            due_date: this.defaultDate,
+          })
         }
         return of(null);
       })

@@ -1,11 +1,11 @@
-import {Component, ElementRef, HostListener, OnInit} from '@angular/core';
+import {Component, ElementRef, EventEmitter, HostListener, OnInit, Output} from '@angular/core';
 import {TasksService} from '../../../tasks/tasks.service';
-import {NgOptimizedImage} from '@angular/common';
-import { CheckboxModule } from 'primeng/checkbox';
-import {FormsModule} from '@angular/forms';
 import {Department} from '../../models/department';
 import {Priority} from '../../models/priority';
 import {Employee} from '../../models/employee';
+import {NgOptimizedImage} from '@angular/common';
+import {CheckboxModule} from 'primeng/checkbox';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-filter',
@@ -18,18 +18,65 @@ import {Employee} from '../../models/employee';
   templateUrl: './filter.component.html',
   styleUrl: './filter.component.scss'
 })
+
 export class FilterComponent implements OnInit {
+  @Output() public onFilterChange: EventEmitter<any> = new EventEmitter();
   public showFilter = false;
   public showDepartmentFilter = false;
   public showPriorityFilter = false;
+  public selectedEmployeeId: number | null = null;
   public showEmployeeFilter = false;
   public departments!: Department[];
   public priorities!: Priority[];
   public employees!: Employee[];
+  public savedFilters: any = [];
+  public department_filters: {[key: string]: boolean} = {};
 
+  public priority_filters: {[key: string]: boolean} = {}
+
+  public employee_filters: {[key: string]: boolean} = {}
+
+
+  public selectSingleEmployee(employeeId: number): void {
+    if (this.selectedEmployeeId === employeeId) {
+      this.selectedEmployeeId = null;
+    } else {
+      this.selectedEmployeeId = employeeId;
+    }
+
+    for (const id in this.employee_filters) {
+      this.employee_filters[id] = false;
+    }
+
+    if (this.selectedEmployeeId !== null) {
+      this.employee_filters[this.selectedEmployeeId] = true;
+    }
+  }
+
+  public removeFilter(filterName: string, employeeId: string) {
+    this.savedFilters = this.savedFilters.filter((f: { name: string; }) => f.name !== filterName);
+
+    if (this.department_filters[filterName] !== undefined) {
+      this.department_filters[filterName] = false;
+    }
+    if (this.priority_filters[filterName] !== undefined) {
+      this.priority_filters[filterName] = false;
+    }
+    if (this.employee_filters[employeeId] !== undefined) {
+      this.employee_filters[employeeId] = false;
+    }
+  }
+
+  public clearFilter() {
+    this.savedFilters = [];
+    this.department_filters = {};
+    this.priority_filters = {};
+    this.employee_filters = {};
+  }
 
   constructor(private taskService: TasksService, private elementRef: ElementRef) {
   }
+
 
   @HostListener('document:click', ['$event'])
   clickOutside(event: MouseEvent) {

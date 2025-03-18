@@ -1,74 +1,92 @@
-<div class="filter">
-  @if (showFilter) {
-    <div class="filter-options">
-      @if (showDepartmentFilter) {
-        <div class="checkbox-wrapper">
-          @for (department of departments; track department.id) {
-            <div class="checkbox">
-              <p-checkbox inputId="dept{{department.id}}" [binary]="true" />
-              <label for="dept{{department.id}}">{{department.name}}</label>
-            </div>
-          }
-        </div>
-      } @else if (showPriorityFilter) {
-        <div class="checkbox-wrapper">
-          @for (priority of priorities; track priority.id) {
-            <div class="checkbox purple">
-              <p-checkbox  inputId="prior{{priority.id}}" [binary]="true" />
-              <label for="prior{{priority.id}}">{{priority.name}}</label>
-            </div>
-          }
-        </div>
-      } @else if (showEmployeeFilter) {
-        <div class="checkbox-wrapper">
-          @for (employee of employees; track employee.id) {
-            <div class="checkbox purple">
-              <p-checkbox  inputId="prior{{employee.id}}" [binary]="true" />
-              <div class="avatar-wrapper">
-                <img [src]="employee.avatar" width="28" height="28" alt="">
-                <label for="prior{{employee.id}}">{{employee.name + ' ' + employee.surname}}</label>
+<div class="filter-wrapper">
+  <div class="filter">
+    @if (showFilter) {
+      <div class="filter-options">
+        @if (showDepartmentFilter) {
+          <div class="checkbox-wrapper">
+            @for (department of departments; track department.id) {
+              <div class="checkbox">
+                <p-checkbox [(ngModel)]="department_filters[department.name]"
+                            inputId="dept{{department.id}}" [binary]="true"/>
+                <label for="dept{{department.id}}">{{ department.name }}</label>
               </div>
-            </div>
-          }
+            }
+          </div>
+        } @else if (showPriorityFilter) {
+          <div class="checkbox-wrapper">
+            @for (priority of priorities; track priority.id) {
+              <div class="checkbox purple">
+                <p-checkbox [(ngModel)]="priority_filters[priority.name]"
+                            inputId="prior{{priority.id}}" [binary]="true"/>
+                <label for="prior{{priority.id}}">{{ priority.name }}</label>
+              </div>
+            }
+          </div>
+        } @else if (showEmployeeFilter) {
+          <div class="checkbox-wrapper">
+            @for (employee of employees; track employee.id) {
+              <div class="checkbox purple">
+                <p-checkbox (onChange)="selectSingleEmployee(employee.id)"
+                            [(ngModel)]="employee_filters[employee.id]" inputId="prior{{employee.id}}" [binary]="true"/>
+                <div class="avatar-wrapper">
+                  <img [src]="employee.avatar" width="28" height="28" alt="">
+                  <label for="prior{{employee.id}}">{{ employee.name + ' ' + employee.surname }}</label>
+                </div>
+              </div>
+            }
+          </div>
+        }
+        <div class="button-wrapper">
+          <button class="btn-tertiary">
+            არჩევა
+          </button>
+        </div>
+      </div>
+    }
+    <ul class="filter-items">
+      <li class="filter-item" [class.active]="showDepartmentFilter" (click)="showFilterOptions(true, false, false)">
+        <h4>
+          დეპარტამენტი
+        </h4>
+        @if (showDepartmentFilter) {
+          <img ngSrc="/assets/images/icons/chevron-down-purple.svg" alt="" height="24" width="24">
+        } @else {
+          <img ngSrc="/assets/images/icons/chevron-down.svg" alt="" height="24" width="24">
+        }
+      </li>
+      <li class="filter-item" [class.active]="showPriorityFilter" (click)="showFilterOptions(false, true, false)">
+        <h4>
+          პრიორიტეტი
+        </h4>
+        @if (showPriorityFilter) {
+          <img ngSrc="/assets/images/icons/chevron-down-purple.svg" alt="" height="24" width="24">
+        } @else {
+          <img ngSrc="/assets/images/icons/chevron-down.svg" alt="" height="24" width="24">
+        }
+      </li>
+      <li class="filter-item" [class.active]="showEmployeeFilter" (click)="showFilterOptions(false, false, true)">
+        <h4>
+          თანამშრომელი
+        </h4>
+        @if (showEmployeeFilter) {
+          <img ngSrc="/assets/images/icons/chevron-down-purple.svg" alt="" height="24" width="24">
+        } @else {
+          <img ngSrc="/assets/images/icons/chevron-down.svg" alt="" height="24" width="24">
+        }
+      </li>
+    </ul>
+  </div>
+  @if (savedFilters && savedFilters.length) {
+    <div class="saved-filters">
+      @for (filter of savedFilters; track index; let index = $index) {
+        <div class="saved-filter" (click)="removeFilter(filter.name, filter.value)">
+          {{filter.name}}
+          <img ngSrc="/assets/images/icons/remove-filter.svg" height="17" width="17" alt="">
         </div>
       }
-      <div class="button-wrapper">
-        <button class="btn-tertiary">
-          არჩევა
-        </button>
+      <div class="clear-filters" (click)="clearFilter()">
+        გასუფთავება
       </div>
     </div>
   }
-  <ul class="filter-items">
-    <li class="filter-item" [class.active]="showDepartmentFilter" (click)="showFilterOptions(true, false, false)">
-      <h4>
-        დეპარტამენტი
-      </h4>
-      @if (showDepartmentFilter) {
-        <img ngSrc="/assets/images/icons/chevron-down-purple.svg" alt="" height="24" width="24">
-      } @else {
-        <img ngSrc="/assets/images/icons/chevron-down.svg" alt="" height="24" width="24">
-      }
-    </li>
-    <li class="filter-item" [class.active]="showPriorityFilter" (click)="showFilterOptions(false, true, false)">
-      <h4>
-        პრიორიტეტი
-      </h4>
-      @if (showPriorityFilter) {
-        <img ngSrc="/assets/images/icons/chevron-down-purple.svg" alt="" height="24" width="24">
-      } @else {
-        <img ngSrc="/assets/images/icons/chevron-down.svg" alt="" height="24" width="24">
-      }
-    </li>
-    <li class="filter-item" [class.active]="showEmployeeFilter" (click)="showFilterOptions(false, false, true)">
-      <h4>
-        თანამშრომელი
-      </h4>
-      @if (showEmployeeFilter) {
-        <img ngSrc="/assets/images/icons/chevron-down-purple.svg" alt="" height="24" width="24">
-      } @else {
-        <img ngSrc="/assets/images/icons/chevron-down.svg" alt="" height="24" width="24">
-      }
-    </li>
-  </ul>
 </div>

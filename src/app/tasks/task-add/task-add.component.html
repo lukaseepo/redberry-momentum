@@ -46,7 +46,7 @@
                   <div
                     class="instruction"
                     [class.instruction-valid]="taskAddForm.get('description')?.value?.['length'] > 0  && (taskAddForm.get('description')?.touched || taskAddForm.get('description')?.dirty) && !taskAddForm.get('description')?.errors?.['pattern']"
-                    [class.instruction-invalid]="taskAddForm.get('description')?.value?.['length'] > 0 || (taskAddForm.get('description')?.touched || taskAddForm.get('description')?.dirty) && taskAddForm.get('description')?.errors?.['pattern']"
+                    [class.instruction-invalid]="taskAddForm.get('description')?.value?.['length'] > 0 && (taskAddForm.get('description')?.touched || taskAddForm.get('description')?.dirty) && taskAddForm.get('description')?.errors?.['pattern']"
                   >
                     მინიმუმ 4 სიტყვა
                   </div>
