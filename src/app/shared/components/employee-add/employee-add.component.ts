@@ -23,7 +23,7 @@ import {ToastService} from '../../../core/services/toast.service';
 export class EmployeeAddComponent implements OnInit {
   public employeeAddForm: FormGroup = new FormGroup({});
   public imagePreview: string | null = null;
-  public imageNotUploaded = false;
+  public imageInvalid = false;
   public departments!: Department[];
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
 
@@ -60,7 +60,7 @@ export class EmployeeAddComponent implements OnInit {
 
   public removeImage(): void {
     this.imagePreview = null;
-    this.imageNotUploaded = true;
+    this.imageInvalid = true;
     this.employeeAddForm.patchValue({
       avatar: null
     });
@@ -75,7 +75,7 @@ export class EmployeeAddComponent implements OnInit {
       this.employeeAddForm.patchValue({
         avatar: file
       });
-      this.imageNotUploaded = false;
+      this.imageInvalid = file.size > 600000;
       reader.onload = () => {
         this.imagePreview = reader.result as string;
       };
@@ -88,11 +88,10 @@ export class EmployeeAddComponent implements OnInit {
     const employeeData = this.employeeAddForm.value;
 
     if(!this.imagePreview) {
-      this.imageNotUploaded = true;
+      this.imageInvalid = true;
     }
 
     if(employeeData.avatar.size > 600000) {
-      this.toastService.showError("ავატარის ზომა არ უნდა აღემატებოდეს 600kb-ს");
       return;
     }
 

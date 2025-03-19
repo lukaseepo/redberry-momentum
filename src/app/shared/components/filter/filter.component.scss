@@ -32,52 +32,52 @@
         display: flex;
         flex-direction: column;
         row-gap: 20px;
-        justify-content: center;
-        .www {
+        .checkboxes {
           display: flex;
           flex-direction: column;
           row-gap: 20px;
-          justify-content: center;
-        }
-        .checkbox {
-          display: flex;
-          column-gap: 12px;
-          align-items: center;
-          .avatar-wrapper {
+          overflow: auto;
+          max-height: 200px;
+          .checkbox {
             display: flex;
-            column-gap: 8px;
+            column-gap: 12px;
             align-items: center;
-            img {
-              border-radius: 50%;
-              object-fit: cover;
+            .avatar-wrapper {
+              display: flex;
+              column-gap: 8px;
+              align-items: center;
+              img {
+                border-radius: 50%;
+                object-fit: cover;
+              }
             }
-          }
-          &.purple {
+            &.purple {
+              ::ng-deep {
+                .p-checkbox-box {
+                  border: 2px solid $purple;
+                }
+                .p-checkbox-checked .p-checkbox-icon {
+                  color: $purple;
+                }
+              }
+            }
             ::ng-deep {
               .p-checkbox-box {
-                border: 2px solid $purple;
+                background: white;
+                border: 2px solid $black;
+                border-radius: 6px;
               }
               .p-checkbox-checked .p-checkbox-icon {
-                color: $purple;
+                color: $black;
+                width: 12px;
+                height: 12px;
               }
             }
-          }
-          ::ng-deep {
-            .p-checkbox-box {
-              background: white;
-              border: 2px solid $black;
-              border-radius: 6px;
-            }
-            .p-checkbox-checked .p-checkbox-icon {
+            label {
               color: $black;
-              width: 12px;
-              height: 12px;
+              font-size: 16px;
+              cursor: pointer;
             }
-          }
-          label {
-            color: $black;
-            font-size: 16px;
-            cursor: pointer;
           }
         }
       }

@@ -29,7 +29,9 @@
   </div>
   <div class="card-description">
     <h4>{{name}}</h4>
-    <p>{{ description.length > 100 ? description.slice(0, 100) + '...' : description}}</p>
+    @if(description && description.length) {
+      <p>{{ description.length > 100 ? description.slice(0, 100) + '...' : description}}</p>
+    }
   </div>
   <div class="card-creator">
     <img class="avatar" [src]="avatar" width="31" height="31" alt="">

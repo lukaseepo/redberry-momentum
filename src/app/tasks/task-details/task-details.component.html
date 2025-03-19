@@ -62,7 +62,7 @@
                 <div class="employee-avatar">
                   <img [src]="task.employee.avatar" alt="">
                   <div class="employee-info">
-                    <span>დიზაინის დეპარტამენტი</span>
+                    <span>{{task.employee.department.name}}</span>
                     {{task.employee.name + ' ' + task.employee.surname}}
                   </div>
                 </div>
@@ -106,52 +106,54 @@
                   {{all_comments_count}}
                 </div>
               </div>
-              @for (comment of comments; track comment.id; let index = $index) {
-                <div class="comment">
-                  <div class="comment-info">
-                    <img class="avatar" [src]="comment.author_avatar" alt="">
-                    <div class="comment-details">
-                      <h4>
-                        {{ comment.author_nickname }}
-                      </h4>
-                      <p>
-                        {{ comment.text }}
-                      </p>
-                      <div class="reply-button" (click)="reply(index)">
-                        <img ngSrc="/assets/images/icons/reply.svg" alt="" height="16" width="16">
-                        უპასუხე
-                      </div>
-                      @if(showReplyAreas[index]) {
-                        <div class="textarea-wrapper answer">
-                          <textarea required pattern=".*\S.*" [(ngModel)]="replyTexts[index]" placeholder="დაწერე კომენტარი"></textarea>
-                          <div class="button-wrapper">
-                            <button class="btn-tertiary" (click)="postComment(comment.id, index)">დააკომენტარე</button>
-                          </div>
+              <div class="comment-wrapper">
+                @for (comment of comments; track comment.id; let index = $index) {
+                  <div class="comment">
+                    <div class="comment-info">
+                      <img class="avatar" [src]="comment.author_avatar" alt="">
+                      <div class="comment-details">
+                        <h4>
+                          {{ comment.author_nickname }}
+                        </h4>
+                        <p>
+                          {{ comment.text }}
+                        </p>
+                        <div class="reply-button" (click)="reply(index)">
+                          <img ngSrc="/assets/images/icons/reply.svg" alt="" height="16" width="16">
+                          უპასუხე
                         </div>
-                      }
-                      @if (comment.sub_comments.length) {
-                        @for (sub_comment of comment.sub_comments; track sub_comment.id) {
-                          <div class="reply">
-                            <div class="comment">
-                              <div class="comment-info">
-                                <img class="avatar" [src]="sub_comment.author_avatar" alt="">
-                                <div class="comment-details">
-                                  <h4>
-                                    {{ sub_comment.author_nickname }}
-                                  </h4>
-                                  <p>
-                                    {{ sub_comment.text }}
-                                  </p>
-                                </div>
-                              </div>
+                        @if(showReplyAreas[index]) {
+                          <div class="textarea-wrapper answer">
+                            <textarea required pattern=".*\S.*" [(ngModel)]="replyTexts[index]" placeholder="დაწერე კომენტარი"></textarea>
+                            <div class="button-wrapper">
+                              <button class="btn-tertiary" (click)="postComment(comment.id, index)">დააკომენტარე</button>
                             </div>
                           </div>
                         }
-                      }
+                        @if (comment.sub_comments.length) {
+                          @for (sub_comment of comment.sub_comments; track sub_comment.id) {
+                            <div class="reply">
+                              <div class="comment">
+                                <div class="comment-info">
+                                  <img class="avatar" [src]="sub_comment.author_avatar" alt="">
+                                  <div class="comment-details">
+                                    <h4>
+                                      {{ sub_comment.author_nickname }}
+                                    </h4>
+                                    <p>
+                                      {{ sub_comment.text }}
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          }
+                        }
+                      </div>
                     </div>
                   </div>
-                </div>
-              }
+                }
+              </div>
             </div>
           }
         </div>

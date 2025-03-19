@@ -75,8 +75,8 @@ export class TaskDetailsComponent implements OnInit {
         this.toastService.showSuccess('კომენტარი წარმატებით დაემატა')
         this.getAllComments();
         this.addedNewComment = true;
+        this.comment = '';
       })
-      this.comment = '';
       return;
     }
 

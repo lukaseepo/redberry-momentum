@@ -4,7 +4,7 @@
       <div class="filter-options">
         @if (showDepartmentFilter) {
           <div class="checkbox-wrapper">
-            <div class="www">
+            <div class="checkboxes">
               @for (department of departments; track department.id) {
                 <div class="checkbox">
                   <p-checkbox [(ngModel)]="department_filters[department.name]"
@@ -21,13 +21,15 @@
           </div>
         } @else if (showPriorityFilter) {
           <div class="checkbox-wrapper">
-            @for (priority of priorities; track priority.id) {
-              <div class="checkbox purple">
-                <p-checkbox [(ngModel)]="priority_filters[priority.name]"
-                            inputId="prior{{priority.id}}" [binary]="true"/>
-                <label for="prior{{priority.id}}">{{ priority.name }}</label>
-              </div>
-            }
+            <div class="checkboxes">
+              @for (priority of priorities; track priority.id) {
+                <div class="checkbox purple">
+                  <p-checkbox [(ngModel)]="priority_filters[priority.name]"
+                              inputId="prior{{priority.id}}" [binary]="true"/>
+                  <label for="prior{{priority.id}}">{{ priority.name }}</label>
+                </div>
+              }
+            </div>
             <div class="button-wrapper">
               <button (click)="filterPriorities()" class="btn-tertiary">
                 არჩევა
@@ -36,21 +38,23 @@
           </div>
         } @else if (showEmployeeFilter) {
           <div class="checkbox-wrapper">
-            @for (employee of employees; track employee.id) {
-              <div class="checkbox purple">
-                <p-checkbox (onChange)="selectSingleEmployee(employee.id)"
-                            [(ngModel)]="employee_filters[employee.id]" inputId="prior{{employee.id}}" [binary]="true"/>
-                <div class="avatar-wrapper">
-                  <img [src]="employee.avatar" width="28" height="28" alt="">
-                  <label for="prior{{employee.id}}">{{ employee.name + ' ' + employee.surname }}</label>
+            <div class="checkboxes">
+              @for (employee of employees; track employee.id) {
+                <div class="checkbox purple">
+                  <p-checkbox (onChange)="selectSingleEmployee(employee.id)"
+                              [(ngModel)]="employee_filters[employee.id]" inputId="prior{{employee.id}}" [binary]="true"/>
+                  <div class="avatar-wrapper">
+                    <img [src]="employee.avatar" width="28" height="28" alt="">
+                    <label for="prior{{employee.id}}">{{ employee.name + ' ' + employee.surname }}</label>
+                  </div>
                 </div>
-              </div>
-            }
-          </div>
-          <div class="button-wrapper">
-            <button (click)="filterEmployees()" class="btn-tertiary">
-              არჩევა
-            </button>
+              }
+            </div>
+            <div class="button-wrapper">
+              <button (click)="filterEmployees()" class="btn-tertiary">
+                არჩევა
+              </button>
+            </div>
           </div>
         }
       </div>

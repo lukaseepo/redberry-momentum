@@ -1,4 +1,4 @@
-import {Component, EventEmitter, HostListener, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, effect, EffectRef, EventEmitter, HostListener, OnDestroy, OnInit, Output} from '@angular/core';
 import {TasksService} from '../../../tasks/tasks.service';
 import {Department} from '../../models/department';
 import {Priority} from '../../models/priority';
@@ -37,6 +37,7 @@ export class FilterComponent implements OnInit, OnDestroy {
   public employee_filters: {[key: string]: boolean} = {}
   private routerSubscription!: Subscription;
   private readonly STORAGE_KEY = 'task_filters';
+  private effectRef!: EffectRef;
 
 
   private loadFiltersFromStorage(): void {
@@ -119,6 +120,14 @@ export class FilterComponent implements OnInit, OnDestroy {
   }
 
   constructor(private taskService: TasksService, private router: Router) {
+    this.effectRef = effect(() => {
+      const triggerCount = this.taskService.employeeUpdateSignal();
+
+      if (triggerCount > 0) {
+        this.getEmployees();
+      }
+    });
+
     this.routerSubscription = this.router.events
       .pipe(filter(event => event instanceof NavigationStart))
       .subscribe(() => {
@@ -232,5 +241,6 @@ export class FilterComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this.routerSubscription.unsubscribe();
+    this.effectRef.destroy();
   }
 }

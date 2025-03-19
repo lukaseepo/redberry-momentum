@@ -24,7 +24,7 @@ export class CardListComponent implements OnInit {
   public filteredTasks!: Task[];
   public finishedTasks!: Task[];
   public statuses!: Status[];
-  private tasksLoaded = false;
+  public tasksLoaded = false;
   private pendingFilters: { [type: string]: { [key: string]: boolean } } | null = null;
   constructor(private taskService: TasksService) { }
 

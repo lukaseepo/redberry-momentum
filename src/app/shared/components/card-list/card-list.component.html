@@ -1,45 +1,61 @@
 <app-filter (filterChange)="onFilterChange($event)"></app-filter>
-<div class="tasks-items">
-  @if (allTasks && allTasks.length && statuses && statuses.length) {
+@if (allTasks && allTasks.length && statuses && statuses.length) {
+  <div class="tasks-items">
     <div class="tasks">
       <div class="task-step start">{{ statuses[0].name }}</div>
       @for (task of startTasks; track task.id) {
-        <app-task-card [task_id]="task.id" [department_id]="task.department.id" [avatar]="task.employee.avatar" [priorityIcon]="task.priority.icon" [due_date]="task.due_date" [comments]="task.total_comments"  [name]="task.name" [description]="task.description" [priority]="task.priority.name" [department]="task.department.name" taskCardClass="start"></app-task-card>
+        <app-task-card [task_id]="task.id" [department_id]="task.department.id" [avatar]="task.employee.avatar"
+                       [priorityIcon]="task.priority.icon" [due_date]="task.due_date" [comments]="task.total_comments"
+                       [name]="task.name" [description]="task.description" [priority]="task.priority.name"
+                       [department]="task.department.name" taskCardClass="start"></app-task-card>
       } @empty {
         <h3>
-          თასქი ვერ მოიძებნა
+          დავალება ვერ მოიძებნა
         </h3>
       }
     </div>
     <div class="tasks">
       <div class="task-step progress">{{ statuses[1].name }}</div>
       @for (task of progressTasks; track task.id) {
-        <app-task-card [task_id]="task.id"  [department_id]="task.department.id"  [avatar]="task.employee.avatar" [priorityIcon]="task.priority.icon" [due_date]="task.due_date" [comments]="task.total_comments"  [name]="task.name" [description]="task.description" [priority]="task.priority.name" [department]="task.department.name"  taskCardClass="progress"></app-task-card>
+        <app-task-card [task_id]="task.id" [department_id]="task.department.id" [avatar]="task.employee.avatar"
+                       [priorityIcon]="task.priority.icon" [due_date]="task.due_date" [comments]="task.total_comments"
+                       [name]="task.name" [description]="task.description" [priority]="task.priority.name"
+                       [department]="task.department.name" taskCardClass="progress"></app-task-card>
       } @empty {
         <h3>
-          თასქი ვერ მოიძებნა
+          დავალება ვერ მოიძებნა
         </h3>
       }
     </div>
     <div class="tasks">
       <div class="task-step testing">{{ statuses[2].name }}</div>
       @for (task of testingTasks; track task.id) {
-        <app-task-card  [task_id]="task.id" [department_id]="task.department.id"  [avatar]="task.employee.avatar" [priorityIcon]="task.priority.icon" [due_date]="task.due_date" [comments]="task.total_comments"  [name]="task.name" [description]="task.description" [priority]="task.priority.name" [department]="task.department.name"  taskCardClass="testing"></app-task-card>
+        <app-task-card [task_id]="task.id" [department_id]="task.department.id" [avatar]="task.employee.avatar"
+                       [priorityIcon]="task.priority.icon" [due_date]="task.due_date" [comments]="task.total_comments"
+                       [name]="task.name" [description]="task.description" [priority]="task.priority.name"
+                       [department]="task.department.name" taskCardClass="testing"></app-task-card>
       } @empty {
         <h3>
-          თასქი ვერ მოიძებნა
+          დავალება ვერ მოიძებნა
         </h3>
       }
     </div>
     <div class="tasks">
       <div class="task-step finished">{{ statuses[3].name }}</div>
       @for (task of finishedTasks; track task.id) {
-        <app-task-card [task_id]="task.id"  [department_id]="task.department.id"  [avatar]="task.employee.avatar" [priorityIcon]="task.priority.icon" [due_date]="task.due_date" [comments]="task.total_comments" [name]="task.name" [description]="task.description" [priority]="task.priority.name" [department]="task.department.name"  taskCardClass="finished"></app-task-card>
+        <app-task-card [task_id]="task.id" [department_id]="task.department.id" [avatar]="task.employee.avatar"
+                       [priorityIcon]="task.priority.icon" [due_date]="task.due_date" [comments]="task.total_comments"
+                       [name]="task.name" [description]="task.description" [priority]="task.priority.name"
+                       [department]="task.department.name" taskCardClass="finished"></app-task-card>
       } @empty {
         <h3>
-          თასქი ვერ მოიძებნა
+          დავალება ვერ მოიძებნა
         </h3>
       }
     </div>
-  }
-</div>
+  </div>
+} @else if(tasksLoaded && allTasks && !allTasks.length) {
+  <h3 class="no-tasks">
+    დავალებები ვერ მოიძებნა
+  </h3>
+}

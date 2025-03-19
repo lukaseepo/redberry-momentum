@@ -151,7 +151,7 @@ export class TaskAddComponent implements OnInit, OnDestroy {
     this.taskService.getPriorities().subscribe((res) => {
       this.priorities = res;
       this.taskAddForm.patchValue({
-        priority_id: this.priorities[0].id
+        priority_id: this.priorities[1].id
       })
     })
   }
@@ -170,7 +170,7 @@ export class TaskAddComponent implements OnInit, OnDestroy {
      if(this.taskAddForm.valid) {
        this.taskService.addTask(this.taskAddForm.value).subscribe(() => {
          this.router.navigate(['/']);
-         this.toastService.showSuccess('თასქი წარმატებით დაემატა');
+         this.toastService.showSuccess('დავალება წარმატებით დაემატა');
          localStorage.removeItem('taskAddFormData');
        })
      }

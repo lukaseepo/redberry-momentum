@@ -53,6 +53,10 @@
               align-items: center;
               cursor: pointer;
               width: max-content;
+              &:hover {
+                opacity: 0.6;
+                transition: 0.3s;
+              }
             }
             h4 {
               color: $black;
@@ -69,8 +73,13 @@
         display: flex;
         flex-direction: column;
         row-gap: 40px;
-        max-height: 450px;
-        overflow: auto;
+        .comment-wrapper {
+          display: flex;
+          flex-direction: column;
+          max-height: 450px;
+          overflow: auto;
+          row-gap: 35px;
+        }
         .comments-count {
           display: flex;
           font-size: 20px;

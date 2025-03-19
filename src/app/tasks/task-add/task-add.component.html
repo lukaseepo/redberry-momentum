@@ -36,6 +36,15 @@
                   appendTo="body"
                   optionValue="id"
                   optionLabel="name"/>
+                <div class="instructions">
+                  <div
+                    class="instruction"
+                    [class.instruction-valid]="taskAddForm.get('department_id')?.valid  && (taskAddForm.get('department_id')?.touched || taskAddForm.get('department_id')?.dirty)"
+                    [class.instruction-invalid]="taskAddForm.get('department_id')?.invalid && (taskAddForm.get('department_id')?.touched || taskAddForm.get('department_id')?.dirty)"
+                  >
+                    აირჩიეთ დეპარტამენტი
+                  </div>
+                </div>
               </div>
             </div>
             <div class="input-wrapper">
@@ -98,6 +107,15 @@
                       </div>
                     </ng-template>
                   </p-select>
+                  <div class="instructions">
+                    <div
+                      class="instruction"
+                      [class.instruction-valid]="taskAddForm.get('employee_id')?.valid  && (taskAddForm.get('employee_id')?.touched || taskAddForm.get('employee_id')?.dirty)"
+                      [class.instruction-invalid]="taskAddForm.get('employee_id')?.invalid && (taskAddForm.get('employee_id')?.touched || taskAddForm.get('employee_id')?.dirty)"
+                    >
+                      აირჩიეთ თანამშრომელი
+                    </div>
+                  </div>
                 </div>
               } @else {
                 <div class="input"></div>
@@ -145,7 +163,7 @@
               </div>
               <div class="input">
                 <label>დედლაინი*</label>
-                <p-datepicker dateFormat="dd/mm/yy"  placeholder="DD/MM/YYYY" [minDate]="minDate" formControlName="due_date" [showIcon]="true" [showOnFocus]="false"></p-datepicker>
+                <p-datepicker dateFormat="dd/mm/yy"  placeholder="DD/MM/YYYY" [minDate]="minDate" formControlName="due_date" [showIcon]="true" [showOnFocus]="true"></p-datepicker>
               </div>
             </div>
             <div class="button-wrapper">
