@@ -155,16 +155,25 @@
                   z-index: 10;
                   padding-left: 0;
                 }
-
+                 .p-datepicker-calendar-container {
+                   padding: 10px;
+                 }
+                .p-datepicker-day-view {
+                  margin-top: 5px;
+                }
                 .p-datepicker-panel {
                   background: white;
                   border: 0;
+                  width: 318px;
+                  margin-top: 5px !important;
+                  box-shadow: 0 12px 24px 0 #00000033;
                   .p-datepicker-year-selected {
                     background: $purple;
                     color: white !important;
                   }
                   .p-datepicker-title {
                     column-gap: 4px;
+                    font-weight: bold;
                     button {
                       color: $black;
                       padding: 0;
@@ -207,6 +216,18 @@
                   .p-datepicker-header {
                     background: white;
                     border-bottom: 0;
+                    p-button {
+                      &:has(.p-datepicker-prev-button) {
+                        position: absolute;
+                        right: 25px;
+                      }
+                      &:has(.p-datepicker-next-button) {
+                        transform: rotateZ(180deg);
+                        position: absolute;
+                        right: 0;
+                      }
+                    }
+
                     .p-button {
                       &:hover {
                         background: transparent;

@@ -22,6 +22,7 @@ import {EmployeeAddComponent} from '../../shared/components/employee-add/employe
 import {maxNonSpaceCharsValidator} from '../../core/validators/char-validator';
 import {of, switchMap, tap} from 'rxjs';
 import localeKa from '@angular/common/locales/ka';
+import {PrimeNG} from 'primeng/config';
 
 
 @Component({
@@ -44,13 +45,14 @@ export class TaskAddComponent implements OnInit, OnDestroy {
   public departments!: Department[];
   public priorities!: Priority[];
   public employees!: Employee[];
+  public ka: any;
   private allEmployees: Employee[] = [];
   private effectRef!: EffectRef;
   public firstLoad = true;
   private defaultDate: Date = new Date();
   public minDate: Date = new Date();
 
-  constructor(private fb: FormBuilder, private dialog: MatDialog, private taskService: TasksService, private toastService: ToastService, private router: Router) {
+  constructor(private fb: FormBuilder, public config: PrimeNG, private dialog: MatDialog, private taskService: TasksService, private toastService: ToastService, private router: Router) {
     this.effectRef = effect(() => {
       const triggerCount = this.taskService.employeeUpdateSignal();
 
@@ -98,6 +100,17 @@ export class TaskAddComponent implements OnInit, OnDestroy {
 
     this.taskAddForm.valueChanges.subscribe((v) => {
       this.saveFormToLocalStorage();
+    });
+
+    this.config.setTranslation( {
+      dayNames: ['კვირა', 'ორშაბათი', 'სამშაბათი', 'ოთხშაბათი', 'ხუთშაბათი', 'პარასკევი', 'შაბათი'],
+      dayNamesShort: ['კვი', 'ორშ', 'სამ', 'ოთხ', 'ხუთ', 'პარ', 'შაბ'],
+      dayNamesMin: ['კვ', 'ორ', 'სა', 'ოთ', 'ხუ', 'პა', 'შა'],
+      monthNames: ['იანვარი', 'თებერვალი', 'მარტი', 'აპრილი', 'მაისი', 'ივნისი', 'ივლისი', 'აგვისტო', 'სექტემბერი', 'ოქტომბერი', 'ნოემბერი', 'დეკემბერი'],
+      monthNamesShort: ['იან', 'თებ', 'მარ', 'აპრ', 'მაი', 'ივნ', 'ივლ', 'აგვ', 'სექ', 'ოქტ', 'ნოე', 'დეკ'],
+      today: 'დღეს',
+      clear: 'გასუფთავება',
+      weekHeader: 'კვ'
     });
   }
 
