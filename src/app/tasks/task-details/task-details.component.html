@@ -82,8 +82,8 @@
           </div>
         </div>
         <div class="comments-wrapper">
-          <div class="textarea-wrapper" [class.not-invalid]="addedNewComment">
-            <textarea required pattern=".*\S.*" (ngModelChange)="addedNewComment = false" [(ngModel)]="comment" placeholder="დაწერე კომენტარი"></textarea>
+          <div class="textarea-wrapper" [class.not-invalid]="notInvalidArea">
+            <textarea required pattern=".*\S.*" (ngModelChange)="disabledAddComment = false" [(ngModel)]="comment" placeholder="დაწერე კომენტარი"></textarea>
             <div class="button-wrapper">
               <button class="btn-tertiary" (click)="postComment()">დააკომენტარე</button>
             </div>

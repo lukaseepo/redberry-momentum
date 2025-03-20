@@ -45,7 +45,6 @@ export class TaskAddComponent implements OnInit, OnDestroy {
   public departments!: Department[];
   public priorities!: Priority[];
   public employees!: Employee[];
-  public ka: any;
   private allEmployees: Employee[] = [];
   private effectRef!: EffectRef;
   public firstLoad = true;

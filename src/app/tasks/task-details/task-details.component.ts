@@ -35,7 +35,8 @@ export class TaskDetailsComponent implements OnInit {
   public all_comments_count = 0;
   public showReplyAreas: boolean[] = [];
   public replyTexts: string[] = [];
-  public addedNewComment = false;
+  public disabledAddComment = false;
+  public notInvalidArea = false;
   public taskStatus = 0;
   public comments!: Comment[];
 
@@ -70,17 +71,22 @@ export class TaskDetailsComponent implements OnInit {
   }
 
   public postComment(parent_id?: number, index?: number) {
-    if(!parent_id && this.comment) {
+    if(!parent_id && this.comment && !this.disabledAddComment) {
+      this.disabledAddComment = true;
       this.taskService.postComment(this.taskId, {text: this.comment}).subscribe(() => {
         this.toastService.showSuccess('კომენტარი წარმატებით დაემატა')
         this.getAllComments();
-        this.addedNewComment = true;
+        this.disabledAddComment = false;
+        this.notInvalidArea = true;
+        this.comment = '';
+      }, () => {
+        this.disabledAddComment = false;
         this.comment = '';
       })
       return;
     }
 
-    if(this.replyTexts[index as number]) {
+    if(this.replyTexts[index as number]?.trim()) {
       this.taskService.postComment(this.taskId, {text: this.replyTexts[index as number], parent_id: parent_id}).subscribe(() => {
         this.toastService.showSuccess('კომენტარი წარმატებით დაემატა')
         this.getAllComments();
