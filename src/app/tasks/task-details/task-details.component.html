@@ -131,7 +131,7 @@
                           </div>
                         }
                         @if (comment.sub_comments.length) {
-                          @for (sub_comment of comment.sub_comments; track sub_comment.id) {
+                          @for (sub_comment of comment.sub_comments.slice().reverse(); track sub_comment.id) {
                             <div class="reply">
                               <div class="comment">
                                 <div class="comment-info">
