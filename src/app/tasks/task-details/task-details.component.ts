@@ -71,7 +71,7 @@ export class TaskDetailsComponent implements OnInit {
   }
 
   public postComment(parent_id?: number, index?: number) {
-    if(!parent_id && this.comment && !this.disabledAddComment) {
+    if(!parent_id && this.comment?.trim() && !this.disabledAddComment) {
       this.disabledAddComment = true;
       this.taskService.postComment(this.taskId, {text: this.comment}).subscribe(() => {
         this.toastService.showSuccess('კომენტარი წარმატებით დაემატა')
