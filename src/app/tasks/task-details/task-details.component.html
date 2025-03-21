@@ -83,7 +83,7 @@
         </div>
         <div class="comments-wrapper">
           <div class="textarea-wrapper" [class.not-invalid]="notInvalidArea">
-            <textarea required pattern=".*\S.*" (ngModelChange)="notInvalidArea = false" [(ngModel)]="comment" placeholder="დაწერე კომენტარი"></textarea>
+            <textarea required pattern="(\s*\S+\s*)+$" (ngModelChange)="notInvalidArea = false" [(ngModel)]="comment" placeholder="დაწერე კომენტარი"></textarea>
             <div class="button-wrapper">
               <button class="btn-tertiary" (click)="postComment()">დააკომენტარე</button>
             </div>
@@ -124,7 +124,7 @@
                         </div>
                         @if(showReplyAreas[index]) {
                           <div class="textarea-wrapper answer">
-                            <textarea required pattern=".*\S.*" [(ngModel)]="replyTexts[index]" placeholder="დაწერე კომენტარი"></textarea>
+                            <textarea required  pattern="(\s*\S+\s*)+$"  [(ngModel)]="replyTexts[index]" placeholder="დაწერე კომენტარი"></textarea>
                             <div class="button-wrapper">
                               <button class="btn-tertiary" (click)="postComment(comment.id, index)">დააკომენტარე</button>
                             </div>
